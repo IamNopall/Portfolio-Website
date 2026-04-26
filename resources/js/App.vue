@@ -4,10 +4,13 @@
         <FooterBar />
         <!-- Minimalist Typography Hero -->
         <section class="hero-section relative min-h-screen w-full flex items-center justify-center bg-[var(--bg)] text-[var(--text)] overflow-hidden" id="top">
+            <div class="hero-grid-lines absolute inset-0 pointer-events-none"></div>
+
             <!-- Center Massive Text -->
             <h1 class="absolute left-1/2 top-1/2 text-[16vw] font-black tracking-tight leading-none uppercase z-10 text-center display-font" style="transform: translate(-50%, -50%) scaleY(1.15);">
                 NOPAL<span class="text-[var(--cursor-dot)]">.</span>
             </h1>
+
 
             <!-- Minimalist custom pointer -->
             <div ref="dotRef" class="minimal-cursor fixed z-50 pointer-events-none"></div>
@@ -19,48 +22,69 @@
             <div class="max-w-7xl mx-auto">
                 <div class="flex justify-between items-end mb-20 font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase reveal">
                     <p>[01] Portfolio Profile</p>
-                    <p>UI/UX / Frontend / Unity Game</p>
+                    <p>Tech Stack</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] gap-16 lg:gap-24 items-end border-b border-[var(--border-subtle)] pb-20 reveal">
-                    <h2 class="text-[18vw] md:text-[13vw] lg:text-[10vw] font-black uppercase leading-[0.78] display-font text-[var(--heading)]" style="transform: scaleY(1.08);">
-                        PORT<br>FOLIO
-                    </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-24 border-b border-[var(--border-subtle)] pb-20 reveal">
+                    <div class="lg:sticky lg:top-24 self-start">
+                        <h2 class="text-[19vw] md:text-[13vw] lg:text-[8.8vw] font-black uppercase leading-[0.78] display-font text-[var(--heading)]" style="transform: scaleY(1.08);">
+                            ABOUT<br>ME
+                        </h2>
+                        <div class="mt-10 grid grid-cols-2 gap-8 font-sans text-[11px] tracking-[0.16em] uppercase text-[var(--muted)]">
+                            <p>Informatics Engineering</p>
+                            <p>Interactive Digital Experiences</p>
+                        </div>
+                    </div>
 
-                    <p class="text-2xl md:text-4xl lg:text-5xl leading-[1.05] text-[var(--text-soft)] max-w-2xl">
-                        A personal digital space built around sharp interface design, clean frontend execution, and interactive game thinking.
-                    </p>
+                    <div class="max-w-3xl lg:pt-4">
+                        <p class="text-2xl md:text-4xl lg:text-5xl leading-[1.04] text-[var(--heading)]">
+                            I build interactive and user-centered digital experiences.
+                        </p>
+                        <div class="mt-12 grid grid-cols-1 md:grid-cols-[0.22fr_0.78fr] gap-8 border-t border-[var(--border-subtle)] pt-8">
+                            <p class="font-sans text-[11px] tracking-[0.18em] uppercase text-[var(--muted)]">Profile</p>
+                            <p class="text-lg md:text-xl leading-relaxed text-justify text-[var(--text-soft)]">
+                                I am an Informatics Engineering student with a strong passion for building interactive and user-centered digital experiences. I specialize in game development using Unity, where I enjoy turning ideas into engaging gameplay. Alongside that, I have a keen interest in UI/UX design, focusing on creating intuitive and visually appealing interfaces. I also work as a frontend developer, translating designs into responsive and functional web applications. I am continuously learning and exploring new technologies to refine my skills and deliver impactful digital products.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="reveal">
-                    <div class="group grid grid-cols-1 lg:grid-cols-[0.18fr_0.52fr_0.3fr] gap-6 lg:gap-10 items-end py-12 border-b border-[var(--border-subtle)]">
-                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase">01</p>
-                        <h3 class="text-[17vw] md:text-[10vw] lg:text-[6.8vw] font-black uppercase leading-[0.82] display-font text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors" style="transform: scaleY(1.08);">
-                            UI/UX
+                <div class="grid grid-cols-1 lg:grid-cols-[0.32fr_0.68fr] gap-12 lg:gap-20 pt-16 reveal">
+                    <div>
+                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase mb-6">Tech Stack</p>
+                        <h3 class="text-[14vw] md:text-[8vw] lg:text-[4.8vw] font-black uppercase leading-[0.85] display-font text-[var(--heading)]" style="transform: scaleY(1.08);">
+                            TOOLS I<br>WORK WITH
                         </h3>
-                        <p class="text-lg md:text-xl text-[var(--text-soft)] leading-relaxed lg:pb-3">
-                            Designing clear flows, strong hierarchy, and interfaces that feel simple without losing character.
-                        </p>
                     </div>
 
-                    <div class="group grid grid-cols-1 lg:grid-cols-[0.18fr_0.52fr_0.3fr] gap-6 lg:gap-10 items-end py-12 border-b border-[var(--border-subtle)]">
-                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase">02</p>
-                        <h3 class="text-[17vw] md:text-[10vw] lg:text-[6.8vw] font-black uppercase leading-[0.82] display-font text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors" style="transform: scaleY(1.08);">
-                            FRONTEND
-                        </h3>
-                        <p class="text-lg md:text-xl text-[var(--text-soft)] leading-relaxed lg:pb-3">
-                            Building responsive web experiences with Vue, Laravel, Tailwind, and smooth interaction details.
-                        </p>
-                    </div>
+                    <div class="border-t border-[var(--border-subtle)]">
+                        <div class="grid grid-cols-1 md:grid-cols-[0.32fr_0.68fr] gap-5 py-8 border-b border-[var(--border-subtle)]">
+                            <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase pt-2">Programming</p>
+                            <p class="text-3xl md:text-5xl leading-[1.05] text-[var(--heading)] display-font">
+                                C# / JavaScript / PHP / HTML / CSS
+                            </p>
+                        </div>
 
-                    <div class="group grid grid-cols-1 lg:grid-cols-[0.18fr_0.52fr_0.3fr] gap-6 lg:gap-10 items-end py-12 border-b border-[var(--border-subtle)]">
-                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase">03</p>
-                        <h3 class="text-[17vw] md:text-[10vw] lg:text-[6.8vw] font-black uppercase leading-[0.82] display-font text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors" style="transform: scaleY(1.08);">
-                            UNITY GAME
-                        </h3>
-                        <p class="text-lg md:text-xl text-[var(--text-soft)] leading-relaxed lg:pb-3">
-                            Creating real-time gameplay, 3D scenes, and interactive systems with a designer's sense of feel.
-                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-[0.32fr_0.68fr] gap-5 py-8 border-b border-[var(--border-subtle)]">
+                            <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase pt-2">Framework</p>
+                            <p class="text-3xl md:text-5xl leading-[1.05] text-[var(--heading)] display-font">
+                                Vue.js / Laravel / Tailwind CSS / Unity
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-[0.32fr_0.68fr] gap-5 py-8 border-b border-[var(--border-subtle)]">
+                            <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase pt-2">Database</p>
+                            <p class="text-3xl md:text-5xl leading-[1.05] text-[var(--heading)] display-font">
+                                MySQL / SQLite / Firebase
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-[0.32fr_0.68fr] gap-5 py-8 border-b border-[var(--border-subtle)]">
+                            <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase pt-2">Tools</p>
+                            <p class="text-3xl md:text-5xl leading-[1.05] text-[var(--heading)] display-font">
+                                Figma / Git / GitHub / VS Code / Blender
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

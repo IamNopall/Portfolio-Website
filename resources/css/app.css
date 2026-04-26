@@ -67,11 +67,10 @@
 .minimal-cursor {
     left: 0;
     top: 0;
-    width: 28px;
-    height: 32px;
+    width: 30px;
+    height: 34px;
     color: var(--cursor-color);
-    filter: drop-shadow(0 1px 0 var(--bg));
-    transition: color 0.35s ease, filter 0.35s ease;
+    transition: color 0.35s ease;
 }
 
 .minimal-cursor::before {
@@ -79,38 +78,34 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 0;
-    height: 0;
-    border-left: 8px solid currentColor;
-    border-top: 12px solid currentColor;
-    border-right: 8px solid transparent;
-    border-bottom: 12px solid transparent;
+    width: 18px;
+    height: 24px;
+    background: currentColor;
     clip-path: polygon(0 0, 0 100%, 38% 70%, 58% 100%, 78% 90%, 58% 60%, 100% 60%);
     transform-origin: 2px 2px;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .minimal-cursor::after {
     content: '';
     position: absolute;
-    left: 18px;
+    left: 19px;
     top: 20px;
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 999px;
     background: var(--cursor-dot);
-    border: 1px solid var(--cursor-dot);
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    transform: translate(0, 0);
+    transition: background-color 0.2s ease, transform 0.25s ease;
 }
 
 .minimal-cursor.is-interactive::before {
-    opacity: 0.45;
-    transform: scale(0.72);
+    opacity: 0.5;
+    transform: scale(0.78);
 }
 
 .minimal-cursor.is-interactive::after {
-    background: transparent;
-    transform: translate(-3px, -3px) scale(2.2);
+    transform: translate(-2px, -2px) scale(1.45);
 }
 
 .inverted-chrome {
@@ -894,4 +889,6 @@ img {
     .hero-orb {
         animation: none;
     }
+    
+    
 }
