@@ -550,6 +550,28 @@ img {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+.portfolio-preview {
+    z-index: 0;
+    transform: scale(1.02);
+    transition: opacity 0.35s ease, transform 0.55s ease;
+}
+
+.portfolio-preview::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.62);
+}
+
+:root.light-mode .portfolio-preview::after {
+    background: rgba(247, 243, 235, 0.68);
+}
+
+.group:hover .portfolio-preview {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .project-media {
     position: relative;
     overflow: hidden;

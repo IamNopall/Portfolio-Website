@@ -47,7 +47,7 @@
                         <a href="#case-study"
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"
                             @click.prevent="scrollToSection('#case-study')">
-                            Case Study
+                            Profile
                         </a>
                         <a href="#about"
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"

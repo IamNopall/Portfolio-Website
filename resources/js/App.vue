@@ -14,69 +14,106 @@
 
         </section>
 
-        <!-- Projects Section -->
-        <section class="w-full bg-[var(--bg)] text-[var(--text)] px-8 py-32 border-t border-[var(--border-subtle)]" id="projects">
+        <!-- Portfolio Profile Section -->
+        <section class="w-full bg-[var(--bg-elev)] text-[var(--text)] px-8 py-32 border-t border-[var(--border-subtle)]" id="case-study">
             <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-24 font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase reveal">
-                    <p>[01] Selected Work</p>
-                    <p>Scroll to explore</p>
+                <div class="flex justify-between items-end mb-20 font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase reveal">
+                    <p>[01] Portfolio Profile</p>
+                    <p>UI/UX / Frontend / Unity Game</p>
                 </div>
-                
-                <div class="flex flex-col border-b border-[var(--border-subtle)]">
-                    <!-- Project Item -->
-                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal">
-                        <h2 class="text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
-                            Lumen OS
-                        </h2>
-                        <p class="font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">Vue / GSAP</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] gap-16 lg:gap-24 items-end border-b border-[var(--border-subtle)] pb-20 reveal">
+                    <h2 class="text-[18vw] md:text-[13vw] lg:text-[10vw] font-black uppercase leading-[0.78] display-font text-[var(--heading)]" style="transform: scaleY(1.08);">
+                        PORT<br>FOLIO
+                    </h2>
+
+                    <p class="text-2xl md:text-4xl lg:text-5xl leading-[1.05] text-[var(--text-soft)] max-w-2xl">
+                        A personal digital space built around sharp interface design, clean frontend execution, and interactive game thinking.
+                    </p>
+                </div>
+
+                <div class="reveal">
+                    <div class="group grid grid-cols-1 lg:grid-cols-[0.18fr_0.52fr_0.3fr] gap-6 lg:gap-10 items-end py-12 border-b border-[var(--border-subtle)]">
+                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase">01</p>
+                        <h3 class="text-[17vw] md:text-[10vw] lg:text-[6.8vw] font-black uppercase leading-[0.82] display-font text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors" style="transform: scaleY(1.08);">
+                            UI/UX
+                        </h3>
+                        <p class="text-lg md:text-xl text-[var(--text-soft)] leading-relaxed lg:pb-3">
+                            Designing clear flows, strong hierarchy, and interfaces that feel simple without losing character.
+                        </p>
                     </div>
-                    <!-- Project Item -->
-                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal">
-                        <h2 class="text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
-                            Atlas Commerce
-                        </h2>
-                        <p class="font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">Laravel</p>
+
+                    <div class="group grid grid-cols-1 lg:grid-cols-[0.18fr_0.52fr_0.3fr] gap-6 lg:gap-10 items-end py-12 border-b border-[var(--border-subtle)]">
+                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase">02</p>
+                        <h3 class="text-[17vw] md:text-[10vw] lg:text-[6.8vw] font-black uppercase leading-[0.82] display-font text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors" style="transform: scaleY(1.08);">
+                            FRONTEND
+                        </h3>
+                        <p class="text-lg md:text-xl text-[var(--text-soft)] leading-relaxed lg:pb-3">
+                            Building responsive web experiences with Vue, Laravel, Tailwind, and smooth interaction details.
+                        </p>
                     </div>
-                    <!-- Project Item -->
-                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal">
-                        <h2 class="text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
-                            Arcadia XR
-                        </h2>
-                        <p class="font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">WebGL</p>
+
+                    <div class="group grid grid-cols-1 lg:grid-cols-[0.18fr_0.52fr_0.3fr] gap-6 lg:gap-10 items-end py-12 border-b border-[var(--border-subtle)]">
+                        <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase">03</p>
+                        <h3 class="text-[17vw] md:text-[10vw] lg:text-[6.8vw] font-black uppercase leading-[0.82] display-font text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors" style="transform: scaleY(1.08);">
+                            UNITY GAME
+                        </h3>
+                        <p class="text-lg md:text-xl text-[var(--text-soft)] leading-relaxed lg:pb-3">
+                            Creating real-time gameplay, 3D scenes, and interactive systems with a designer's sense of feel.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Case Study Section -->
-        <section class="w-full bg-[var(--bg-elev)] text-[var(--text)] px-8 py-32 border-t border-[var(--border-subtle)]" id="case-study">
+        <!-- Projects Section -->
+        <section class="w-full bg-[var(--bg)] text-[var(--text)] px-8 py-32 border-t border-[var(--border-subtle)]" id="projects">
             <div class="max-w-7xl mx-auto">
                 <div class="flex justify-between items-end mb-24 font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase reveal">
-                    <p>[02] Case Study</p>
-                    <p>NovaPay</p>
+                    <p>[02] Portfolio List</p>
+                    <p>Dummy projects</p>
                 </div>
-
-                <h2 class="text-3xl md:text-5xl lg:text-7xl font-medium tracking-tight mb-24 max-w-5xl leading-[1.1] reveal">
-                    NovaPay onboarding rebuilt for clarity. Full-funnel experience design that reduced drop-offs while keeping the premium tone.
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 border-t border-[var(--border-subtle)] pt-12 reveal">
-                    <div>
-                        <p class="font-sans text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase mb-4">Problem</p>
-                        <p class="text-lg text-[var(--text-soft)] leading-relaxed">Dense onboarding dropped user trust within the first minute.</p>
+                
+                <div class="flex flex-col border-b border-[var(--border-subtle)]">
+                    <!-- Project Item -->
+                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
+                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
+                            Portfolio Website
+                        </h2>
+                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
+                            <img :src="'/img/project-dashboard.png'" alt="" class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
+                        </div>
+                        <p class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">UI/UX / Vue / Laravel</p>
                     </div>
-                    <div>
-                        <p class="font-sans text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase mb-4">Solution</p>
-                        <p class="text-lg text-[var(--text-soft)] leading-relaxed">Guided narrative with clear progress cues and calm animations.</p>
+                    <!-- Project Item -->
+                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
+                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
+                            Mobile App UI
+                        </h2>
+                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
+                            <img :src="'/img/project-mobile.png'" alt="" class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
+                        </div>
+                        <p class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">Figma / Prototype / UX Flow</p>
                     </div>
-                    <div>
-                        <p class="font-sans text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase mb-4">Process</p>
-                        <p class="text-lg text-[var(--text-soft)] leading-relaxed">Rapid prototyping, motion studies, and usability labs.</p>
+                    <!-- Project Item -->
+                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
+                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
+                            Unity Adventure
+                        </h2>
+                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
+                            <img :src="'/img/project-game.png'" alt="" class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
+                        </div>
+                        <p class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">Unity / C# / 3D Game</p>
                     </div>
-                    <div>
-                        <p class="font-sans text-[11px] tracking-[0.16em] text-[var(--muted)] uppercase mb-4">Result</p>
-                        <p class="text-5xl md:text-7xl font-black tracking-tighter text-[var(--accent-blue)] display-font" style="transform: scaleY(1.1);">+42%</p>
-                        <p class="text-sm text-[var(--muted)] mt-4">Completion rate lift</p>
+                    <!-- Project Item -->
+                    <div class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
+                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font" style="transform: scaleY(1.1);">
+                            Dashboard UI
+                        </h2>
+                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
+                            <img :src="'/img/project-ecommerce.png'" alt="" class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
+                        </div>
+                        <p class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">Frontend / Admin Panel</p>
                     </div>
                 </div>
             </div>
