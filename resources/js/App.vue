@@ -262,7 +262,8 @@ const stackGroups = [
     {
         title: 'Programming',
         items: [
-            { name: 'C#', icon: 'dotnet', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg' },
+            { name: 'C#', icon: 'csharp', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-plain.svg' },
+            { name: 'C++', icon: 'cplusplus' },
             { name: 'JavaScript', icon: 'javascript' },
             { name: 'PHP', icon: 'php' },
             { name: 'HTML', icon: 'html5' },
