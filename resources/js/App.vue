@@ -12,10 +12,13 @@
             <h1 class="absolute left-1/2 top-1/2 text-[16vw] font-black tracking-tight leading-none uppercase z-10 text-center display-font whitespace-nowrap flex items-baseline"
                 style="transform: translate(-50%, -50%) scaleY(1.15);">
                 NOPAL<span 
+                    ref="heroDotRef"
                     class="cursor-pointer transition-all duration-300 inline-block"
-                    :class="isFollowerActive 
-                        ? 'text-[var(--muted)] opacity-40' 
-                        : 'text-[var(--cursor-dot)] hover:[text-shadow:0_0_20px_var(--cursor-dot),0_0_40px_var(--cursor-dot)] hover:brightness-125'"
+                    :class="isFollowerActive
+                        ? 'text-[var(--muted)] opacity-40'
+                        : (isHeroDotHover
+                            ? 'text-[var(--cursor-dot)] [text-shadow:0_0_20px_var(--cursor-dot),0_0_40px_var(--cursor-dot)] brightness-125'
+                            : 'text-[var(--cursor-dot)]')"
                     @click="toggleFollowerDot">.</span>
             </h1>
 
@@ -110,88 +113,13 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section class="w-full bg-[var(--bg)] text-[var(--text)] px-8 py-32 border-t border-[var(--border-subtle)]"
-            id="projects">
-            <div class="max-w-7xl mx-auto">
-                <div
-                    class="flex justify-between items-end mb-24 font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase reveal">
-                    <p>[02] Portfolio List</p>
-                    <p>Dummy projects</p>
-                </div>
-
-                <div class="flex flex-col border-b border-[var(--border-subtle)]">
-                    <!-- Project Item -->
-                    <div
-                        class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
-                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font"
-                            style="transform: scaleY(1.1);">
-                            Portfolio Website
-                        </h2>
-                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
-                            <img :src="'/img/project-dashboard.png'" alt=""
-                                class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
-                        </div>
-                        <p
-                            class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
-                            UI/UX / Vue / Laravel</p>
-                    </div>
-                    <!-- Project Item -->
-                    <div
-                        class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
-                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font"
-                            style="transform: scaleY(1.1);">
-                            Mobile App UI
-                        </h2>
-                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
-                            <img :src="'/img/project-mobile.png'" alt=""
-                                class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
-                        </div>
-                        <p
-                            class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
-                            Figma / Prototype / UX Flow</p>
-                    </div>
-                    <!-- Project Item -->
-                    <div
-                        class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
-                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font"
-                            style="transform: scaleY(1.1);">
-                            Unity Adventure
-                        </h2>
-                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
-                            <img :src="'/img/project-game.png'" alt=""
-                                class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
-                        </div>
-                        <p
-                            class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
-                            Unity / C# / 3D Game</p>
-                    </div>
-                    <!-- Project Item -->
-                    <div
-                        class="group relative py-12 border-t border-[var(--border-subtle)] flex flex-col md:flex-row md:justify-between md:items-center cursor-pointer hover:bg-[var(--hover-bg)] transition-colors reveal overflow-hidden">
-                        <h2 class="relative z-10 text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors display-font"
-                            style="transform: scaleY(1.1);">
-                            Dashboard UI
-                        </h2>
-                        <div class="portfolio-preview absolute inset-0 overflow-hidden bg-[var(--bg)] opacity-0">
-                            <img :src="'/img/project-ecommerce.png'" alt=""
-                                class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0">
-                        </div>
-                        <p
-                            class="relative z-10 font-sans text-xs tracking-[0.16em] uppercase text-[var(--muted)] mt-4 md:mt-0 opacity-50 group-hover:opacity-100 transition-opacity">
-                            Frontend / Admin Panel</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- About Section -->
         <section class="w-full bg-[var(--bg)] text-[var(--text)] px-8 py-32 border-t border-[var(--border-subtle)]"
             id="about">
             <div class="max-w-7xl mx-auto">
                 <div
                     class="flex justify-between items-end mb-24 font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase reveal">
-                    <p>[03] About</p>
+                    <p>[02] About</p>
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-16 justify-between items-start reveal">
@@ -224,7 +152,7 @@
         <section
             class="w-full bg-[var(--bg-elev)] text-[var(--text)] px-8 py-32 md:py-48 border-t border-[var(--border-subtle)] flex flex-col items-center justify-center text-center overflow-hidden"
             id="contact">
-            <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase mb-8 reveal">[04] Ready to
+            <p class="font-sans text-[11px] tracking-[0.18em] text-[var(--muted)] uppercase mb-8 reveal">[03] Ready to
                 build?</p>
             <a href="mailto:naufaltsq333@gmail.com"
                 class="text-[15vw] md:text-[12vw] font-black uppercase tracking-tighter leading-none hover:text-[var(--accent-blue)] transition-colors reveal display-font"
@@ -243,12 +171,30 @@ import HeaderBar from './components/HeaderBar.vue';
 
 const cursorRef = ref(null);
 const dotRef = ref(null);
+const heroDotRef = ref(null);
 let observer;
 let rafId;
 
 const isFollowerActive = ref(false);
+const isHeroDotHover = ref(false);
+
+const isPointerOnHeroDot = (clientX, clientY) => {
+    if (!heroDotRef.value) return false;
+
+    const rect = heroDotRef.value.getBoundingClientRect();
+    const dotCenterX = rect.left + rect.width / 2;
+    const dotCenterY = rect.bottom - rect.height * 0.16;
+    const radius = Math.max(6, Math.min(rect.width * 0.55, rect.height * 0.12));
+
+    const dx = clientX - dotCenterX;
+    const dy = clientY - dotCenterY;
+
+    return dx * dx + dy * dy <= radius * radius;
+};
 
 const toggleFollowerDot = (e) => {
+    if (!isPointerOnHeroDot(e.clientX, e.clientY)) return;
+
     isFollowerActive.value = !isFollowerActive.value;
     
     if (isFollowerActive.value) {
@@ -305,6 +251,7 @@ const interactiveSelector = 'a, button, [role="button"], .cursor-pointer';
 const handleMouseMove = (e) => {
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
+    isHeroDotHover.value = !isFollowerActive.value && isPointerOnHeroDot(e.clientX, e.clientY);
 };
 
 const handlePointerOver = (e) => {
