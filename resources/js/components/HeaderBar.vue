@@ -1,11 +1,11 @@
 <template>
-    <header class="fixed top-0 left-0 right-0 z-40 pointer-events-none">
+    <header class="fixed top-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
-            class="inverted-chrome px-8 pt-6 pb-4 flex justify-between w-full text-[11px] tracking-[0.18em] font-sans uppercase">
+            class="px-8 pt-6 pb-4 flex justify-between w-full text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
             <div class="flex gap-[18vw]">
                 <a href="#top" class="pointer-events-auto cursor-pointer"
                     @click.prevent="scrollToSection('#top')">
-                    Nopal Portfolio
+                    Portfolio
                 </a>
                 <button
                     type="button"
@@ -13,13 +13,18 @@
                     :aria-pressed="isLightMode"
                     @click="toggleLightMode"
                 >
-                    {{ isLightMode ? 'Dark Mode' : 'Light Mode' }}
+                    <Transition name="menu-label" mode="out-in">
+                        <span :key="themeLabel" class="menu-label">{{ themeLabel }}</span>
+                    </Transition>
                 </button>
             </div>
             <div class="flex gap-[18vw]">
-                <button type="button" class="pointer-events-auto cursor-pointer"
-                    :aria-expanded="menuOpen" aria-controls="menu-overlay" @click="toggleMenu">
-                    {{ menuOpen ? 'Close' : 'Menu' }}
+                <button type="button" class="menu-toggle pointer-events-auto cursor-pointer"
+                    :aria-expanded="menuOpen" aria-controls="menu-overlay" @click="toggleMenu"
+                    @mouseenter="isMenuHover = true" @mouseleave="isMenuHover = false">
+                    <Transition name="menu-label" mode="out-in">
+                        <span :key="menuLabel" class="menu-label">{{ menuLabel }}</span>
+                    </Transition>
                 </button>
                 <a href="#contact" class="pointer-events-auto cursor-pointer"
                     @click.prevent="scrollToSection('#contact')">
@@ -44,9 +49,9 @@
                             @click.prevent="scrollToSection('#projects')">
                             Projects
                         </a>
-                        <a href="#case-study"
+                        <a href="#profile"
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"
-                            @click.prevent="scrollToSection('#case-study')">
+                            @click.prevent="scrollToSection('#profile')">
                             Profile
                         </a>
                         <a href="#about"
@@ -77,10 +82,13 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const menuOpen = ref(false);
 const isLightMode = ref(false);
+const isMenuHover = ref(false);
+const menuLabel = computed(() => (menuOpen.value ? 'CLOSE' : (isMenuHover.value ? 'OPEN' : 'MENU')));
+const themeLabel = computed(() => (isLightMode.value ? 'DARK MODE' : 'LIGHT MODE'));
 
 const toggleMenu = () => {
     menuOpen.value = !menuOpen.value;

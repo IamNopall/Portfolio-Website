@@ -1,8 +1,7 @@
 <template>
-    <footer class="fixed bottom-0 left-0 right-0 z-40 pointer-events-none">
+    <footer class="fixed bottom-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
-            class="inverted-chrome px-8 pb-6 pt-4 flex justify-between w-full text-[11px] tracking-[0.18em] font-sans uppercase"
-        >
+            class="px-8 pb-6 pt-4 flex justify-between w-full text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
             <span></span>
             <span class="pointer-events-auto">
                 {{ displayText }}
@@ -20,83 +19,105 @@ let clockInterval;
 
 // 🔹 fallback timezone (pasti ada)
 const getTimezoneFallback = () => {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ');
+    return Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ').split('/').pop();
+    // .split('/').pop() mengubah "Asia/Jakarta" menjadi "Jakarta" agar lebih rapi
 };
 
 onMounted(async () => {
-    try {
-        // =========================
-        // 1. GET IP DATA (lat/lon)
-        // =========================
-        const ipRes = await fetch('https://ipwho.is/');
-        const ipData = await ipRes.json();
+    // =========================
+    // 0. CEK CACHE LOKASI (Agar lebih cepat)
+    // =========================
+    const cachedLocation = localStorage.getItem('user_location');
+    if (cachedLocation) {
+        locationString.value = cachedLocation;
+    }
 
-        let finalLocation = '';
+    if (!cachedLocation) {
+        try {
+            // =========================
+            // 1. GET IP DATA (lat/lon)
+            // =========================
+            const ipRes = await fetch('https://ipwho.is/');
+            const ipData = await ipRes.json();
 
-        if (ipData.success && ipData.latitude && ipData.longitude) {
-            const { latitude, longitude } = ipData;
+            let finalLocation = '';
 
-            try {
-                // =========================
-                // 2. REVERSE GEOCODING
-                // =========================
-                const geoRes = await fetch(
-                    `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
-                    {
-                        headers: {
-                            'User-Agent': 'portfolio-app'
+            if (ipData.success && ipData.latitude && ipData.longitude) {
+                const { latitude, longitude } = ipData;
+
+                try {
+                    // =========================
+                    // 2. REVERSE GEOCODING
+                    // =========================
+                    const geoRes = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
+                        {
+                            headers: {
+                                // Nominatim sangat ketat soal User-Agent
+                                'User-Agent': 'VuePortfolioApp/1.0 (contact@yourdomain.com)'
+                            }
                         }
+                    );
+
+                    if (!geoRes.ok) throw new Error('Nominatim error');
+
+                    const geoData = await geoRes.json();
+                    const addr = geoData.address || {};
+
+                    // 🔹 Ambil dari tingkat paling kecil/spesifik ke besar
+                    const specificArea =
+                        addr.neighbourhood ||
+                        addr.quarter ||
+                        addr.suburb ||
+                        addr.city_district ||
+                        addr.borough ||
+                        addr.village;
+
+                    const city =
+                        addr.city ||
+                        addr.town ||
+                        addr.county ||
+                        addr.municipality ||
+                        ipData.city;
+
+                    const region = addr.state || ipData.region;
+
+                    // =========================
+                    // 3. BUILD LOCATION STRING
+                    // =========================
+                    if (specificArea && city && specificArea !== city) {
+                        finalLocation = `${specificArea}, ${city}`;
+                    } else if (city && region) {
+                        finalLocation = `${city}, ${region}`;
+                    } else if (city) {
+                        finalLocation = city;
                     }
-                );
-
-                const geoData = await geoRes.json();
-                const addr = geoData.address || {};
-
-                // 🔹 ambil paling spesifik yang tersedia
-                const district =
-                    addr.suburb ||
-                    addr.city_district ||
-                    addr.village ||
-                    addr.town;
-
-                const city =
-                    addr.city ||
-                    addr.town ||
-                    addr.county ||
-                    ipData.city;
-
-                const region = addr.state || ipData.region;
-
-                // =========================
-                // 3. BUILD LOCATION STRING
-                // =========================
-                if (district && city) {
-                    finalLocation = `${district}, ${city}`;
-                } else if (city && region) {
-                    finalLocation = `${city}, ${region}`;
-                } else if (city) {
-                    finalLocation = city;
-                }
-            } catch (geoError) {
-                // fallback kalau reverse gagal
-                if (ipData.city && ipData.region) {
-                    finalLocation = `${ipData.city}, ${ipData.region}`;
-                } else if (ipData.city) {
-                    finalLocation = ipData.city;
+                } catch (geoError) {
+                    // fallback kalau reverse gagal (limit API dll)
+                    if (ipData.city && ipData.region) {
+                        finalLocation = `${ipData.city}, ${ipData.region}`;
+                    } else if (ipData.city) {
+                        finalLocation = ipData.city;
+                    }
                 }
             }
-        }
 
-        // =========================
-        // 4. FINAL FALLBACK
-        // =========================
-        if (!finalLocation) {
-            finalLocation = getTimezoneFallback();
-        }
+            // =========================
+            // 4. FINAL FALLBACK & SAVE CACHE
+            // =========================
+            if (!finalLocation) {
+                finalLocation = getTimezoneFallback();
+            }
 
-        locationString.value = finalLocation.toUpperCase();
-    } catch (err) {
-        locationString.value = getTimezoneFallback().toUpperCase();
+            const formattedLocation = finalLocation.toUpperCase();
+            locationString.value = formattedLocation;
+
+            // Simpan ke localStorage agar visit berikutnya instan
+            localStorage.setItem('user_location', formattedLocation);
+
+        } catch (err) {
+            locationString.value = getTimezoneFallback().toUpperCase();
+        }
     }
 
     // =========================
@@ -112,7 +133,7 @@ onMounted(async () => {
         displayText.value = `${locationString.value} ${h}:${m}:${s}`;
     };
 
-    updateClock();
+    updateClock(); // Eksekusi langsung agar tidak nunggu 1 detik
     clockInterval = setInterval(updateClock, 1000);
 });
 
