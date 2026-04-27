@@ -44,11 +44,6 @@
                             @click.prevent="scrollToSection('#top')">
                             Home
                         </a>
-                        <a href="#projects"
-                            class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"
-                            @click.prevent="scrollToSection('#projects')">
-                            Projects
-                        </a>
                         <a href="#profile"
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"
                             @click.prevent="scrollToSection('#profile')">
@@ -66,9 +61,12 @@
                             @click.prevent="scrollToSection('#contact')">
                             Contact
                         </a>
+                        <a href="/projects"
+                            class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors">
+                            Projects
+                        </a>
                         <span
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font text-[var(--muted)]">
-                            
                         </span>
                         <span
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font text-[var(--muted)]">
