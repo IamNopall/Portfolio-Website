@@ -1,9 +1,9 @@
 <template>
     <header class="fixed top-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
-            class="px-8 pt-6 pb-4 flex justify-between w-full text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
-            <div class="flex gap-[18vw]">
-                <a href="#top" class="pointer-events-auto cursor-pointer"
+            class="px-4 sm:px-8 pt-5 sm:pt-6 pb-4 flex items-center justify-between w-full text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
+            <div class="flex items-center gap-6 sm:gap-[12vw] md:gap-[18vw]">
+                <a href="#top" class="hidden sm:inline-block pointer-events-auto cursor-pointer"
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
@@ -18,7 +18,7 @@
                     </Transition>
                 </button>
             </div>
-            <div class="flex gap-[18vw]">
+            <div class="flex items-center gap-6 sm:gap-[12vw] md:gap-[18vw]">
                 <button type="button" class="menu-toggle pointer-events-auto cursor-pointer"
                     :aria-expanded="menuOpen" aria-controls="menu-overlay" @click="toggleMenu"
                     @mouseenter="isMenuHover = true" @mouseleave="isMenuHover = false">
@@ -26,7 +26,7 @@
                         <span :key="menuLabel" class="menu-label">{{ menuLabel }}</span>
                     </Transition>
                 </button>
-                <a href="#contact" class="pointer-events-auto cursor-pointer"
+                <a href="#contact" class="hidden sm:inline-block pointer-events-auto cursor-pointer"
                     @click.prevent="scrollToSection('#contact')">
                     Let's Talk!
                 </a>
@@ -36,8 +36,8 @@
 
     <Transition name="menu-clip">
         <div v-if="menuOpen" id="menu-overlay" class="menu-overlay fixed inset-0 z-30 bg-[var(--bg)] text-[var(--text)]">
-            <div class="h-full px-8 pt-28 pb-20">
-                <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div class="h-full px-4 sm:px-8 pt-20 sm:pt-28 pb-12 sm:pb-20">
+                <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16">
                     <div class="space-y-8">
                         <a href="#top"
                             class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"
@@ -54,6 +54,11 @@
                             @click.prevent="scrollToSection('#about')">
                             About
                         </a>
+                        <a href="#projects"
+                            class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors"
+                            @click.prevent="scrollToSection('#projects')">
+                            Projects
+                        </a>
                     </div>
                     <div class="space-y-8">
                         <a href="#contact"
@@ -61,17 +66,6 @@
                             @click.prevent="scrollToSection('#contact')">
                             Contact
                         </a>
-                        <a href="/projects"
-                            class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font hover:text-[var(--heading)] transition-colors">
-                            Projects
-                        </a>
-                        <span
-                            class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font text-[var(--muted)]">
-                        </span>
-                        <span
-                            class="block text-[12vw] md:text-[6vw] font-black uppercase tracking-tight leading-[0.9] display-font text-[var(--muted)]">
-                           
-                        </span>
                     </div>
                 </div>
             </div>
