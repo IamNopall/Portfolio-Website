@@ -88,6 +88,10 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
 
 const menuOpen = ref(false);
 const isMenuHover = ref(false);
@@ -103,6 +107,20 @@ const closeMenu = () => {
 
 const scrollToSection = (selector) => {
     closeMenu();
+
+    if (route.path !== '/') {
+        router.push({ path: '/', hash: selector }).then(() => {
+            setTimeout(() => {
+                if (selector === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const el = document.querySelector(selector);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        });
+        return;
+    }
 
     if (selector === '#top') {
         window.scrollTo({ top: 0, behavior: 'smooth' });

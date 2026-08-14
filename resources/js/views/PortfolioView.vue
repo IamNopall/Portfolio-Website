@@ -50,7 +50,7 @@
                 <div class="relative w-full">
                     <!-- Atmospheric Central Backlight & Silhouette Character -->
                     <div ref="standeeContainerRef"
-                        class="standee-container absolute bottom-0 left-0 right-0 pointer-events-none hidden lg:flex items-center justify-center z-0 overflow-hidden h-[750px] reveal"
+                        class="standee-container absolute -bottom-10 left-0 right-0 pointer-events-none hidden lg:flex items-center justify-center z-0 overflow-hidden h-[750px] reveal"
                         :style="silhouetteParallaxStyle">
                         <!-- Radial Spotlight Glow -->
                         <div
@@ -188,66 +188,67 @@
             </div>
         </section>
 
-        <!-- Projects Section: Classic Editorial Typography Showcase -->
+        <!-- Projects Section: Minimalist Editorial Showcase -->
         <section
-            class="w-full bg-[var(--bg)] text-[var(--text)] px-4 sm:px-8 py-20 sm:py-32 border-t border-[var(--border-subtle)]"
+            class="w-full bg-[var(--bg)] text-[var(--text)] px-4 sm:px-8 py-24 sm:py-36 border-t border-[var(--border-subtle)]"
             id="projects">
             <div class="max-w-7xl mx-auto">
-                <!-- Section Meta Anchor -->
+                <!-- Section Header / Meta -->
                 <div
-                    class="flex justify-between items-baseline mb-8 sm:mb-12 font-sans text-[10px] sm:text-[11px] tracking-[0.25em] text-[var(--muted)] uppercase reveal">
-                    <p>03 / SELECTED WORKS CATALOGUE</p>
-                    <p class="font-sans tracking-widest tabular-nums">{{ filteredProjects.length }} OF {{
-                        projects.length }} WORKS INDEXED</p>
+                    class="flex justify-between items-baseline mb-10 sm:mb-14 font-sans text-[10px] sm:text-[11px] tracking-[0.25em] text-[var(--muted)] uppercase reveal">
+                    <p>03 / SELECTED WORKS</p>
+                    <p class="tracking-widest tabular-nums">{{ filteredProjects.length }} OF {{ projects.length }} WORKS
+                    </p>
                 </div>
 
-                <!-- Headline & Editorial Intro -->
+                <!-- Headline & Controls -->
                 <div
-                    class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16 pb-8 border-b border-[var(--border-subtle)] reveal">
+                    class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 sm:mb-16 pb-8 border-b border-[var(--border-subtle)] reveal">
                     <div>
                         <h2 class="display-font font-black uppercase leading-[0.88] tracking-tighter text-[var(--heading)]"
-                            style="font-size: clamp(3rem, 7.5vw, 6rem);">
+                            style="font-size: clamp(2.75rem, 6.5vw, 5.5rem);">
                             SELECTED WORKS.
                         </h2>
                         <p
-                            class="font-sans text-xs sm:text-sm text-[var(--text-soft)] mt-3 max-w-xl font-light leading-relaxed">
-                            List karya yang pernah saya buat
+                            class="font-sans text-xs sm:text-sm text-[var(--text-soft)] mt-3 max-w-lg font-light leading-relaxed">
+                            Curated portfolio of interactive experiences, game mechanics, and web applications.
                         </p>
                     </div>
 
-                    <!-- Filter & Search Controls (Classic Minimalist) -->
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0">
+                    <!-- Filter & Search Controls (Minimalist Toolbar) -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 shrink-0">
                         <!-- Minimalist Search Input -->
-                        <div class="relative min-w-[200px] sm:min-w-[240px]">
-                            <input v-model="projectSearch" type="text" placeholder="FILTER ARCHIVE..."
-                                class="w-full bg-transparent border-b border-[var(--border-subtle)] focus:border-[var(--heading)] px-2 py-2 text-xs font-sans text-[var(--heading)] placeholder:text-[var(--muted)]/60 focus:outline-none transition-colors uppercase tracking-[0.15em]" />
+                        <div class="relative min-w-[200px] sm:min-w-[220px]">
+                            <input v-model="projectSearch" type="text" placeholder="SEARCH WORK..."
+                                class="w-full bg-transparent border-b border-[var(--border-subtle)] focus:border-[var(--heading)] px-1 py-2 text-xs font-sans text-[var(--heading)] placeholder:text-[var(--muted)]/50 focus:outline-none transition-colors uppercase tracking-[0.18em]" />
                             <button v-if="projectSearch" @click="projectSearch = ''"
-                                class="absolute inset-y-0 right-0 pr-1 flex items-center text-xs text-[var(--muted)] hover:text-[var(--heading)]">
+                                class="absolute inset-y-0 right-0 pr-1 flex items-center text-xs text-[var(--muted)] hover:text-[var(--heading)] transition-colors">
                                 ✕
                             </button>
                         </div>
 
-                        <!-- View Switcher (Classic Tabs) -->
+                        <!-- View Switcher (Clean Minimalist Toggle) -->
                         <div
-                            class="flex items-center gap-4 text-[10px] tracking-[0.2em] font-sans uppercase text-[var(--muted)] pt-1 sm:pt-0">
-                            <button @click="viewMode = 'grid'" class="transition-colors pb-0.5"
-                                :class="viewMode === 'grid' ? 'text-[var(--heading)] font-bold border-b border-[var(--heading)]' : 'hover:text-[var(--heading)]'">
+                            class="flex items-center gap-1.5 p-1 bg-[var(--hover-bg)] border border-[var(--border-subtle)]/50 text-[10px] tracking-[0.18em] font-sans uppercase">
+                            <button @click="viewMode = 'grid'"
+                                class="px-3 py-1.5 transition-all duration-200 cursor-pointer"
+                                :class="viewMode === 'grid' ? 'bg-[var(--heading)] text-[var(--bg)] font-bold' : 'text-[var(--muted)] hover:text-[var(--heading)]'">
                                 GRID
                             </button>
-                            <span class="opacity-30">/</span>
-                            <button @click="viewMode = 'list'" class="transition-colors pb-0.5"
-                                :class="viewMode === 'list' ? 'text-[var(--heading)] font-bold border-b border-[var(--heading)]' : 'hover:text-[var(--heading)]'">
+                            <button @click="viewMode = 'list'"
+                                class="px-3 py-1.5 transition-all duration-200 cursor-pointer"
+                                :class="viewMode === 'list' ? 'bg-[var(--heading)] text-[var(--bg)] font-bold' : 'text-[var(--muted)] hover:text-[var(--heading)]'">
                                 LIST
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Classic Category Filter Line -->
+                <!-- Category Filter Line (Minimalist Clean Navigation) -->
                 <div
-                    class="flex items-center gap-6 sm:gap-10 overflow-x-auto pb-4 mb-10 sm:mb-14 scrollbar-none border-b border-[var(--border-subtle)]/60 reveal">
+                    class="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-4 mb-12 sm:mb-16 scrollbar-none border-b border-[var(--border-subtle)]/50 reveal">
                     <button v-for="cat in projectCategories" :key="cat"
-                        class="font-sans text-[11px] tracking-[0.2em] uppercase py-2 transition-colors relative whitespace-nowrap"
+                        class="font-sans text-[11px] tracking-[0.2em] uppercase py-2 transition-all relative whitespace-nowrap cursor-pointer"
                         :class="activeCategory === cat
                             ? 'text-[var(--heading)] font-bold'
                             : 'text-[var(--muted)] hover:text-[var(--heading)]'
@@ -260,110 +261,124 @@
                                     : projects.filter((p) => p.category === cat).length
                             }})
                         </span>
-                        <!-- Active Hairline Underline -->
                         <span v-if="activeCategory === cat"
-                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--heading)]"></span>
+                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--heading)] transition-all"></span>
                     </button>
                 </div>
 
                 <!-- Empty State -->
                 <div v-if="filteredProjects.length === 0"
-                    class="py-24 text-center border border-[var(--border-subtle)] p-8">
+                    class="py-24 text-center border border-[var(--border-subtle)]/60 p-8">
                     <p class="display-font text-3xl sm:text-4xl font-black uppercase text-[var(--muted)] mb-2">NO WORKS
                         FOUND</p>
                     <p class="font-sans text-xs text-[var(--muted)] max-w-sm mx-auto mb-6">
-                        Tidak ada karya yang cocok dengan kata kunci pencarian.
+                        No projects match your current filter or search criteria.
                     </p>
                     <button @click="resetFilters"
-                        class="font-sans text-[10px] tracking-[0.2em] uppercase px-5 py-2.5 border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--heading)] font-bold transition-colors">
+                        class="font-sans text-[10px] tracking-[0.2em] uppercase px-6 py-2.5 border border-[var(--heading)] text-[var(--heading)] font-bold hover:bg-[var(--heading)] hover:text-[var(--bg)] transition-colors cursor-pointer">
                         RESET FILTER
                     </button>
                 </div>
 
-                <!-- 1. CLASSIC EDITORIAL GRID VIEW -->
+                <!-- 1. MINIMALIST GALLERY GRID VIEW -->
                 <div v-else-if="viewMode === 'grid'">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                         <div v-for="(project, i) in filteredProjects" :key="project.id ?? project.title"
                             @click="openProjectDetail(project)"
-                            class="group relative flex flex-col justify-between border border-[var(--border-subtle)] hover:border-[var(--heading)] bg-[var(--bg)] p-7 sm:p-8 transition-all duration-300 cursor-pointer">
+                            class="group relative flex flex-col justify-between p-5 sm:p-6 border border-[var(--border-subtle)] hover:border-[var(--border)] bg-transparent hover:bg-[var(--hover-bg)]/40 transition-all duration-500 cursor-pointer">
 
-                            <!-- Card Header Metadata -->
                             <div>
+                                <!-- Sleek Media Container -->
                                 <div
-                                    class="flex items-baseline justify-between gap-2 pb-4 mb-6 border-b border-[var(--border-subtle)] text-[10px] tracking-[0.2em] font-sans text-[var(--muted)] uppercase">
-                                    <span class="font-semibold text-[var(--heading)]">INDEX / 0{{ i + 1 }}</span>
-                                    <span>{{ project.category }} · {{ project.year }}</span>
-                                </div>
-
-                                <!-- Classic Typographic Gallery Plate or Uploaded Image Preview -->
-                                <div
-                                    class="relative h-48 w-full bg-[var(--hover-bg)] border border-[var(--border-subtle)]/60 mb-6 flex flex-col items-center justify-center group-hover:border-[var(--border-subtle)] transition-colors overflow-hidden">
-                                    <!-- Delicate Corner Crosshairs -->
-                                    <span
-                                        class="absolute top-2 left-2 text-[10px] text-[var(--muted)]/40 font-mono z-10">+</span>
-                                    <span
-                                        class="absolute top-2 right-2 text-[10px] text-[var(--muted)]/40 font-mono z-10">+</span>
-                                    <span
-                                        class="absolute bottom-2 left-2 text-[10px] text-[var(--muted)]/40 font-mono z-10">+</span>
-                                    <span
-                                        class="absolute bottom-2 right-2 text-[10px] text-[var(--muted)]/40 font-mono z-10">+</span>
-
+                                    class="relative aspect-[16/10] w-full bg-[var(--hover-bg)] border border-[var(--border-subtle)]/60 overflow-hidden mb-6 flex items-center justify-center">
                                     <!-- Render Image if available -->
                                     <template v-if="project.image">
                                         <img :src="project.image" :alt="project.title"
-                                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 filter contrast-105"
+                                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                                             loading="lazy" />
                                         <div
-                                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none opacity-40 group-hover:opacity-10 transition-opacity">
+                                            class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-30 group-hover:opacity-10 transition-opacity">
                                         </div>
                                     </template>
 
-                                    <!-- Otherwise Fallback to Roman Numeral / Typographic Monogram Watermark -->
+                                    <!-- Typographic Plate if no image -->
                                     <template v-else>
-                                        <span
-                                            class="display-font text-5xl sm:text-6xl font-black uppercase tracking-tighter text-[var(--heading)] opacity-30 group-hover:opacity-60 transition-opacity select-none">
-                                            {{ getRomanNumeral(i + 1) }}
-                                        </span>
-                                        <span
-                                            class="font-sans text-[9px] tracking-[0.25em] text-[var(--muted)] uppercase mt-1">
-                                            CATALOGUE ENTRY
-                                        </span>
+                                        <div
+                                            class="w-full h-full flex flex-col items-center justify-center relative p-6 bg-gradient-to-br from-white/[0.03] to-transparent">
+                                            <span
+                                                class="display-font text-6xl sm:text-7xl font-black uppercase tracking-tighter text-[var(--heading)] opacity-25 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500 select-none">
+                                                0{{ i + 1 }}
+                                            </span>
+                                            <span
+                                                class="font-sans text-[9px] tracking-[0.25em] text-[var(--muted)] uppercase mt-2">
+                                                {{ project.category }}
+                                            </span>
+                                        </div>
                                     </template>
+
+                                    <!-- Top Left Category Badge -->
+                                    <div class="absolute top-3 left-3 z-10">
+                                        <span
+                                            class="font-sans text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 bg-[var(--bg)]/85 backdrop-blur-sm border border-[var(--border-subtle)] text-[var(--text-soft)] font-medium">
+                                            {{ project.category }}
+                                        </span>
+                                    </div>
+
+                                    <!-- Top Right Arrow Indicator -->
+                                    <div
+                                        class="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-[var(--bg)]/85 backdrop-blur-sm border border-[var(--border-subtle)] flex items-center justify-center text-[var(--heading)] opacity-0 group-hover:opacity-100 group-hover:scale-100 scale-75 transition-all duration-300">
+                                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 17L17 7" />
+                                            <path d="M7 7h10v10" />
+                                        </svg>
+                                    </div>
                                 </div>
 
-                                <!-- Title & Summary -->
+                                <!-- Card Content -->
+                                <div
+                                    class="flex items-center justify-between text-[10px] tracking-[0.2em] font-sans text-[var(--muted)] uppercase mb-2">
+                                    <span>0{{ i + 1 }}</span>
+                                    <span class="tabular-nums">{{ project.year }}</span>
+                                </div>
+
                                 <h3
-                                    class="display-font font-black uppercase text-3xl sm:text-4xl text-[var(--heading)] group-hover:text-[var(--text-soft)] transition-colors leading-[0.88] tracking-tight mb-3">
+                                    class="display-font font-black uppercase text-3xl sm:text-4xl text-[var(--heading)] group-hover:text-[var(--text-soft)] transition-colors leading-[0.9] tracking-tight mb-3">
                                     {{ project.title }}
                                 </h3>
+
                                 <p
-                                    class="font-sans text-xs text-[var(--muted)] leading-relaxed line-clamp-3 font-light mb-6">
+                                    class="font-sans text-xs text-[var(--muted)] leading-relaxed line-clamp-2 font-light mb-6">
                                     {{ project.desc }}
                                 </p>
                             </div>
 
-                            <!-- Card Footer: Elegant Typographic Stack & Link -->
+                            <!-- Card Footer: Minimalist Tags Line -->
                             <div
-                                class="pt-5 border-t border-[var(--border-subtle)] flex items-center justify-between gap-4 mt-auto">
+                                class="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between gap-4 mt-auto">
                                 <div
                                     class="font-sans text-[10px] tracking-[0.15em] text-[var(--muted)] uppercase truncate">
-                                    <span>{{ (project.tags ?? []).join(' · ') }}</span>
+                                    <span>{{ (project.tags ?? []).slice(0, 3).join(' · ') }}</span>
                                 </div>
                                 <span
-                                    class="font-sans text-xs font-semibold text-[var(--heading)] group-hover:translate-x-1 transition-transform shrink-0">
-                                    →
+                                    class="text-[var(--heading)] group-hover:translate-x-1 transition-transform shrink-0">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14" />
+                                        <path d="M12 5l7 7-7 7" />
+                                    </svg>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. CLASSIC EDITORIAL LIST VIEW -->
+                <!-- 2. MINIMALIST EDITORIAL LIST VIEW -->
                 <div v-else
                     class="divide-y divide-[var(--border-subtle)] border-t border-b border-[var(--border-subtle)]">
                     <div v-for="(project, i) in filteredProjects" :key="project.id ?? project.title"
                         @click="openProjectDetail(project)"
-                        class="group relative py-8 sm:py-10 px-2 sm:px-4 transition-colors hover:bg-[var(--hover-bg)] cursor-pointer flex flex-col md:flex-row md:items-baseline justify-between gap-6">
+                        class="group relative py-8 sm:py-10 px-3 sm:px-6 transition-all duration-300 hover:bg-[var(--hover-bg)] cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-6">
 
                         <div class="flex items-baseline gap-6 md:gap-10 flex-1 min-w-0">
                             <span class="font-sans text-xs text-[var(--muted)] tracking-[0.2em] uppercase shrink-0">
@@ -373,7 +388,7 @@
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-baseline gap-4 mb-2 flex-wrap">
                                     <h3
-                                        class="display-font font-black uppercase text-3xl sm:text-5xl text-[var(--heading)] group-hover:text-[var(--text-soft)] transition-colors tracking-tight leading-none">
+                                        class="display-font font-black uppercase text-3xl sm:text-5xl text-[var(--heading)] group-hover:text-[var(--text-soft)] group-hover:translate-x-1.5 transition-all duration-300 tracking-tight leading-none">
                                         {{ project.title }}
                                     </h3>
                                     <span class="font-sans text-[10px] tracking-[0.2em] text-[var(--muted)] uppercase">
@@ -392,97 +407,17 @@
                             <span class="hidden lg:inline">{{ (project.tags ?? []).slice(0, 3).join(' · ') }}</span>
                             <span class="tabular-nums">{{ project.year }}</span>
                             <span
-                                class="font-bold text-[var(--heading)] group-hover:translate-x-1 transition-transform">→</span>
+                                class="text-[var(--heading)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Project Quick-Detail Modal (Classic Exhibition Sheet) -->
-            <Teleport to="body">
-                <Transition name="modal-fade">
-                    <div v-if="selectedProject"
-                        class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-black/80 backdrop-blur-md overflow-y-auto"
-                        @click="closeProjectDetail">
-
-                        <div class="relative w-full max-w-2xl bg-[var(--bg)] text-[var(--text)] border border-[var(--heading)] shadow-2xl overflow-hidden my-auto p-6 sm:p-12"
-                            @click.stop>
-
-                            <!-- Modal Top Bar -->
-                            <div
-                                class="flex items-center justify-between pb-6 mb-8 border-b border-[var(--border-subtle)] font-sans text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase">
-                                <span>CATALOGUE // {{ selectedProject.category }}</span>
-                                <button @click="closeProjectDetail"
-                                    class="hover:text-[var(--heading)] transition-colors cursor-pointer">
-                                    [ CLOSE ✕ ]
-                                </button>
-                            </div>
-
-                            <!-- Modal Body -->
-                            <div class="space-y-8 max-h-[70vh] overflow-y-auto pr-1">
-                                <!-- Modal Hero Image if available -->
-                                <div v-if="selectedProject.image"
-                                    class="w-full h-56 sm:h-72 bg-[var(--hover-bg)] border border-[var(--border-subtle)] overflow-hidden">
-                                    <img :src="selectedProject.image" :alt="selectedProject.title"
-                                        class="w-full h-full object-cover" />
-                                </div>
-
-                                <div>
-                                    <span
-                                        class="font-sans text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase block mb-2">
-                                        RELEASE {{ selectedProject.year }}
-                                    </span>
-                                    <h2
-                                        class="display-font text-4xl sm:text-6xl font-black uppercase text-[var(--heading)] leading-[0.88] tracking-tighter">
-                                        {{ selectedProject.title }}
-                                    </h2>
-                                </div>
-
-                                <!-- Deep Description -->
-                                <div class="pt-6 border-t border-[var(--border-subtle)]">
-                                    <h4
-                                        class="font-sans text-[10px] tracking-[0.25em] uppercase text-[var(--muted)] mb-3">
-                                        OVERVIEW &amp; CONTEXT
-                                    </h4>
-                                    <p
-                                        class="font-sans text-sm sm:text-base leading-relaxed text-[var(--text-soft)] font-light">
-                                        {{ selectedProject.desc }}
-                                    </p>
-                                </div>
-
-                                <!-- Stack Breakdown -->
-                                <div v-if="selectedProject.tags && selectedProject.tags.length > 0"
-                                    class="pt-6 border-t border-[var(--border-subtle)]">
-                                    <h4
-                                        class="font-sans text-[10px] tracking-[0.25em] uppercase text-[var(--muted)] mb-3">
-                                        TECHNOLOGIES &amp; TOOLS
-                                    </h4>
-                                    <div
-                                        class="flex flex-wrap gap-x-6 gap-y-2 font-sans text-xs sm:text-sm tracking-[0.12em] uppercase text-[var(--heading)]">
-                                        <span v-for="tag in selectedProject.tags" :key="tag"
-                                            class="flex items-center gap-2">
-                                            <span class="text-[var(--muted)]">—</span>
-                                            <span>{{ tag }}</span>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- Footer Action -->
-                                <div
-                                    class="pt-8 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                                    <span class="font-sans text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]">
-                                        INDEX ARCHIVE // #{{ selectedProject.id ?? '01' }}
-                                    </span>
-                                    <button @click="closeProjectDetail"
-                                        class="font-sans text-xs tracking-[0.2em] uppercase px-6 py-3 bg-[var(--heading)] text-[var(--bg)] font-bold hover:opacity-90 transition-opacity cursor-pointer">
-                                        RETURN TO CATALOGUE
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Transition>
-            </Teleport>
         </section>
 
         <!-- Contact Section -->
@@ -512,8 +447,12 @@ import {
     ref,
     watch,
 } from "vue";
+import { useRouter } from "vue-router";
 import FooterBar from "../components/FooterBar.vue";
 import HeaderBar from "../components/HeaderBar.vue";
+import { slugify } from "../data/projectsData.js";
+
+const router = useRouter();
 
 const heroH1Ref = ref(null);
 let observer;
@@ -679,14 +618,39 @@ const stackGroups = [
 const projects = ref([]);
 const projectSearch = ref("");
 const viewMode = ref("grid"); // 'grid' | 'list'
-const selectedProject = ref(null);
 
 const fetchProjects = async () => {
     try {
         const res = await fetch("/api/projects");
         const json = await res.json();
-        if (json.success) {
-            projects.value = json.data;
+        if (json.success && Array.isArray(json.data)) {
+            const apiData = json.data.map(p => {
+                const slug = slugify(p.title);
+                if (!p.image) {
+                    if (slug === 'void-walker') p.image = '/images/projects/voidwalker-hero.jpg';
+                    else if (slug === 'aquaverse') p.image = '/images/projects/aquaverse-hero.jpg';
+                    else if (slug === 'nopal-dev') p.image = '/images/projects/aquaverse-hero.jpg';
+                }
+                return p;
+            });
+
+            const hasAquaverse = apiData.some(p => slugify(p.title) === 'aquaverse');
+            if (!hasAquaverse) {
+                projects.value = [
+                    {
+                        id: 99,
+                        title: 'AQUAVERSE',
+                        category: 'VR Development',
+                        year: '2026',
+                        desc: 'VR Educational Media for Aquaculture & Deep-Sea Ecosystems built with Unity and OpenXR.',
+                        image: '/images/projects/aquaverse-hero.jpg',
+                        tags: ['Unity 3D', 'C#', 'OpenXR', 'Meta Quest 2']
+                    },
+                    ...apiData
+                ];
+            } else {
+                projects.value = apiData;
+            }
         }
     } catch (err) {
         console.error("Failed to fetch projects:", err);
@@ -720,29 +684,9 @@ const resetFilters = () => {
 };
 
 const openProjectDetail = (proj) => {
-    selectedProject.value = proj;
-};
-
-const closeProjectDetail = () => {
-    selectedProject.value = null;
-};
-
-const getRomanNumeral = (num) => {
-    const romanMap = [
-        [10, "X"],
-        [9, "IX"],
-        [5, "V"],
-        [4, "IV"],
-        [1, "I"],
-    ];
-    let result = "";
-    for (const [val, roman] of romanMap) {
-        while (num >= val) {
-            result += roman;
-            num -= val;
-        }
-    }
-    return result || "I";
+    if (!proj) return;
+    const slug = proj.slug || slugify(proj.title);
+    router.push('/projects/' + slug);
 };
 
 const standeeContainerRef = ref(null);
