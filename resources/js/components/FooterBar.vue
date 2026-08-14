@@ -1,7 +1,7 @@
 <template>
     <footer class="fixed bottom-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
-            class="px-4 sm:px-8 pb-6 pt-4 flex justify-between w-full text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
+            class="px-4 sm:px-8 pb-4 pt-3 sm:pb-6 sm:pt-4 flex justify-between w-full text-[9px] sm:text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
             <span></span>
             <span class="pointer-events-auto">
                 {{ displayText }}

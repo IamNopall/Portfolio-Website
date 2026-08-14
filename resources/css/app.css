@@ -60,6 +60,55 @@
     --cursor-dot: #1d4ed8;
 }
 
+/* Standee Theme Swapping & Scroll Pop-Up Animation */
+.standee-dark,
+.standee-light,
+.standee-light-shadow {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(40px) scale(0.92);
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.standee-container.is-visible .standee-dark {
+    opacity: 0.9;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.standee-container.is-visible .standee-light {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.standee-container.is-visible .standee-light-shadow {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+html.light-mode .standee-container.is-visible .standee-dark {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+html.light-mode .standee-container.is-visible .standee-light {
+    opacity: 0.95 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+}
+
+html.light-mode .standee-container.is-visible .standee-light-shadow {
+    opacity: 0.45 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+}
+
 *,
 *::before,
 *::after {
@@ -126,6 +175,19 @@ textarea,
     will-change: transform;
 }
 
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+    .minimal-cursor,
+    .cursor-follower-dot {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    html, body, a, button, input, textarea, select, label, .cursor-pointer {
+        cursor: none !important;
+    }
+}
+
 .inverted-chrome {
     color: var(--text);
 }
@@ -175,6 +237,21 @@ section,
         background-color 0.35s ease,
         color 0.35s ease,
         border-color 0.35s ease;
+}
+
+/* ── Scroll Reveal Utility ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 body::before {
@@ -281,42 +358,64 @@ img {
 
 .menu-overlay {
     pointer-events: auto;
-    transform-origin: 50% 50%;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 175%, 0% 100%);
+    backdrop-filter: blur(12px);
+    will-change: opacity, transform, clip-path;
 }
 
-.menu-clip-enter-active,
+/* Dramatic Menu Entrance & Exit Transitions (Proportional Opacity & Motion) */
+.menu-clip-enter-active {
+    transition:
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        clip-path 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .menu-clip-leave-active {
     transition:
-        clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.7s ease,
-        transform 0.85s ease;
-    transform-origin: 50% 50%;
+        opacity 0.5s cubic-bezier(0.7, 0, 0.84, 0),
+        transform 0.55s cubic-bezier(0.7, 0, 0.84, 0),
+        clip-path 0.65s cubic-bezier(0.7, 0, 0.84, 0);
 }
 
 .menu-clip-enter-from {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
     opacity: 0;
-    transform: translateY(-20px) scale(0.98);
+    transform: translateY(-50px) scale(0.95);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }
 
 .menu-clip-enter-to {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 175%, 0% 100%);
     opacity: 1;
     transform: translateY(0) scale(1);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .menu-clip-leave-from {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 175%, 0% 100%);
     opacity: 1;
     transform: translateY(0) scale(1);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .menu-clip-leave-to {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
     opacity: 0;
-    transform: translateY(-20px) scale(0.98);
+    transform: translateY(-40px) scale(0.96);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 }
+
+/* Staggered Navigation Link Entrance */
+.menu-clip-enter-active .menu-link-item {
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-clip-enter-from .menu-link-item {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.menu-clip-enter-active .menu-link-item:nth-child(1) { transition-delay: 0.1s; }
+.menu-clip-enter-active .menu-link-item:nth-child(2) { transition-delay: 0.16s; }
+.menu-clip-enter-active .menu-link-item:nth-child(3) { transition-delay: 0.22s; }
+.menu-clip-enter-active .menu-link-item:nth-child(4) { transition-delay: 0.28s; }
+.menu-clip-enter-active .menu-link-item:nth-child(5) { transition-delay: 0.34s; }
 
 .menu-toggle .menu-label {
     display: inline-block;
@@ -1316,4 +1415,62 @@ img {
         opacity: 0.6;
         margin-top: 8px;
     }
+}
+
+/* Modal Transition Utilities */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.97);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Minimalist Scrollbar Style for the entire site and specific scrollable elements */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Light mode overrides for minimalist scrollbar */
+html.light-mode ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+html.light-mode ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.24);
+}
+
+/* Specific scrollbar styling to hide default arrows on some platforms */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+html.light-mode * {
+    scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
 }

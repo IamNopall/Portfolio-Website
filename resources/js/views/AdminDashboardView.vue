@@ -1,0 +1,581 @@
+<template>
+    <div class="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300 relative overflow-x-hidden font-sans selection:bg-[var(--heading)] selection:text-[var(--bg)]">
+        <!-- Ambient Grid Lines & Background Accent -->
+        <div class="fixed inset-0 pointer-events-none opacity-10 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.12)_0%,rgba(0,0,0,0)_70%)] light-mode:bg-[radial-gradient(ellipse_at_top,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0)_70%)]"></div>
+        <div class="fixed inset-0 pointer-events-none opacity-[0.07] bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] sm:bg-[size:6rem_6rem]"></div>
+
+        <!-- 🔒 AUTHENTICATION LOCK SCREEN (If Not Authenticated) -->
+        <div v-if="!isAuthenticated" class="min-h-[100dvh] flex items-center justify-center px-4 py-8 sm:p-8 relative z-30 overflow-hidden">
+            <!-- Massive Display Typography Background Watermark -->
+            <h1 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-black uppercase tracking-tighter text-[var(--heading)]/[0.03] display-font text-[28vw] sm:text-[20vw] leading-none select-none pointer-events-none whitespace-nowrap z-0">
+                RESTRICTED
+            </h1>
+
+            <div class="w-full max-w-xl bg-[var(--bg)] border-2 border-[var(--heading)] p-6 sm:p-12 relative z-10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] transition-all">
+                <!-- Hairline Top Status Bar -->
+                <div class="flex items-center justify-between pb-4 mb-6 sm:pb-6 sm:mb-8 border-b border-[var(--border-subtle)] font-mono text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[var(--muted)]">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                        <span class="text-red-400 font-bold">SECURITY PROTOCOL</span>
+                    </div>
+                    <span>PORT: 8000</span>
+                </div>
+
+                <!-- Editorial Headline Stack -->
+                <div class="mb-8 sm:mb-10">
+                    <span class="font-mono text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] text-[var(--muted)] uppercase block mb-2 sm:mb-3">
+                        00 / AUTHORIZATION GATE
+                    </span>
+                    <h2 class="display-font text-4xl sm:text-7xl font-black uppercase tracking-tighter text-[var(--heading)] leading-[0.88] mb-3 sm:mb-4">
+                        SYSTEM<br/>ACCESS
+                    </h2>
+                    <p class="font-sans text-xs sm:text-sm text-[var(--text-soft)] leading-relaxed pt-1">
+                        Konsol administrasi berbasis tipografi editorial. Masukkan Security PIN enkripsi untuk mengelola index karya &amp; proyek portofolio.
+                    </p>
+                </div>
+
+                <!-- Error Alert -->
+                <div v-if="authError" class="mb-6 sm:mb-8 p-3 sm:p-4 text-[10px] sm:text-xs font-mono tracking-wider uppercase border-l-4 border-l-red-500 bg-red-950/30 border border-red-800/40 text-red-300 flex items-center justify-between animate-shake">
+                    <span>⚠️ {{ authError }}</span>
+                    <button @click="authError = ''" class="opacity-70 hover:opacity-100 font-bold ml-2">&times;</button>
+                </div>
+
+                <!-- Typography-Driven PIN Form -->
+                <form @submit.prevent="verifyPin" class="space-y-6 sm:space-y-8">
+                    <div>
+                        <div class="flex justify-between items-baseline mb-2 sm:mb-3">
+                            <label class="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] text-[var(--muted)] uppercase">
+                                ENTER SECURITY PIN
+                            </label>
+                            <span class="font-mono text-[8px] sm:text-[9px] text-[var(--muted)] tracking-widest uppercase opacity-70">
+                                DEFAULT: 123456
+                            </span>
+                        </div>
+
+                        <div class="relative group">
+                            <input v-model="pinInput" :type="showPin ? 'text' : 'password'" required autofocus
+                                placeholder="• • • • • •"
+                                class="w-full bg-[var(--bg)] border-b-2 border-[var(--border-subtle)] focus:border-[var(--heading)] px-2 py-3 sm:py-4 font-mono text-xl sm:text-3xl tracking-[0.3em] sm:tracking-[0.35em] text-[var(--heading)] focus:outline-none transition-colors placeholder:text-[var(--muted)]/20 pr-16 sm:pr-20" />
+                            <button type="button" @click="showPin = !showPin"
+                                class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 font-mono text-[9px] sm:text-[10px] tracking-widest text-[var(--muted)] hover:text-[var(--heading)] uppercase px-2 py-1 border border-[var(--border-subtle)] transition-colors">
+                                {{ showPin ? 'HIDE' : 'SHOW' }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" :disabled="isVerifying"
+                            class="w-full font-sans text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.25em] uppercase py-4 sm:py-5 bg-[var(--heading)] text-[var(--bg)] font-black hover:opacity-90 transition-all cursor-pointer shadow-xl active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 sm:gap-3">
+                            <span>{{ isVerifying ? 'VERIFYING...' : 'UNLOCK MANAGEMENT CONSOLE →' }}</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Footer Return Anchor -->
+                <div class="mt-8 sm:mt-12 pt-5 sm:pt-6 border-t border-[var(--border-subtle)] flex items-center justify-between font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[var(--muted)]">
+                    <router-link to="/"
+                        class="hover:text-[var(--heading)] transition-colors inline-flex items-center gap-1.5 font-sans text-xs tracking-[0.1em] sm:tracking-[0.15em]">
+                        <span>←</span> RETURN TO PORTFOLIO
+                    </router-link>
+                    <span class="opacity-50">SHA-256 SECURED</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔓 DASHBOARD MAIN WORKSPACE (If Authenticated) -->
+        <template v-else>
+            <!-- Top HUD Navigation Bar -->
+            <header class="border-b border-[var(--border-subtle)] sticky top-0 bg-[var(--bg)]/95 backdrop-blur-xl z-40 px-4 sm:px-8 py-4 sm:py-5 transition-colors">
+                <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+                    <!-- Brand & Status -->
+                    <div class="flex items-center gap-3 sm:gap-5">
+                        <div class="relative flex items-center justify-center shrink-0">
+                            <span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-emerald-500 animate-ping absolute opacity-75"></span>
+                            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 relative"></span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 sm:gap-3">
+                                <h1 class="display-font text-lg sm:text-2xl font-black uppercase tracking-tight text-[var(--heading)] leading-none">
+                                    NAUFAL TSAQIF
+                                </h1>
+                                <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.2em] text-[var(--bg)] bg-[var(--heading)] font-bold px-1.5 py-0.5 uppercase shrink-0">
+                                    ADMIN OS
+                                </span>
+                            </div>
+                            <div class="hidden sm:flex items-center gap-3 font-mono text-[9px] tracking-[0.2em] text-[var(--muted)] uppercase mt-0.5">
+                                <span>PORTFOLIO EDITORIAL CONSOLE</span>
+                                <span class="opacity-30">•</span>
+                                <span>DB: MYSQL_3306</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clock & Navigation -->
+                    <div class="flex items-center gap-2 sm:gap-6 shrink-0">
+                        <div class="hidden lg:flex flex-col text-right font-mono text-[10px] tracking-[0.2em] text-[var(--muted)] uppercase">
+                            <span class="text-[var(--heading)] font-semibold">{{ liveTime }}</span>
+                            <span class="text-[8px] opacity-60">SYSTEM LOCAL TIME</span>
+                        </div>
+
+                        <router-link to="/"
+                            class="font-sans text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-2 sm:px-5 sm:py-2.5 border border-[var(--border-subtle)] text-[var(--text-soft)] hover:text-[var(--heading)] hover:border-[var(--heading)] hover:bg-[var(--hover-bg)] transition-all flex items-center gap-1.5 group font-semibold">
+                            <span class="group-hover:-translate-x-1 transition-transform">←</span> PORTFOLIO
+                        </router-link>
+
+                        <button @click="logout"
+                            class="font-sans text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-2 sm:px-4 sm:py-2.5 border border-red-900/40 text-red-400 hover:bg-red-950/40 hover:border-red-600 transition-all cursor-pointer font-semibold flex items-center gap-1"
+                            title="Lock Console">
+                            <span>🔒</span> <span class="hidden sm:inline">LOGOUT</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Dashboard Body -->
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 relative z-10">
+                <!-- Header Title & Quick Action -->
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-12 pb-6 sm:pb-10 border-b-2 border-[var(--heading)]">
+                    <div>
+                        <div class="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 font-mono text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-[var(--muted)] uppercase">
+                            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[var(--heading)] inline-block"></span>
+                            <span>01 / KARYA INDEX</span>
+                        </div>
+                        <h2 class="display-font text-4xl sm:text-7xl lg:text-8xl font-black uppercase leading-[0.88] sm:leading-[0.85] tracking-tighter text-[var(--heading)]">
+                            WORKS CONTROL.
+                        </h2>
+                    </div>
+
+                    <button @click="openCreateModal"
+                        class="font-sans text-xs tracking-[0.2em] sm:tracking-[0.25em] uppercase px-6 py-3.5 sm:px-8 sm:py-4 bg-[var(--heading)] text-[var(--bg)] font-black hover:opacity-90 transition-all self-stretch sm:self-auto shadow-xl active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 sm:gap-3">
+                        <span class="text-base font-bold">+</span> ADD NEW WORK
+                    </button>
+                </div>
+
+                <!-- Editorial High-Contrast Typography Metrics Grid -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-8 sm:mb-14">
+                    <!-- Total Works -->
+                    <div class="p-4 sm:p-8 border border-[var(--border-subtle)] bg-[var(--bg)] relative overflow-hidden group hover:border-[var(--heading)] transition-colors">
+                        <div class="flex justify-between items-baseline mb-4 sm:mb-6 border-b border-[var(--border-subtle)] pb-2 sm:pb-3">
+                            <span class="font-mono text-[8px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] uppercase text-[var(--muted)] font-semibold">
+                                01 / INDEXED
+                            </span>
+                            <span class="font-mono text-[8px] sm:text-[9px] text-[var(--muted)] tracking-widest uppercase">COUNT</span>
+                        </div>
+                        <div class="display-font text-4xl sm:text-6xl font-black text-[var(--heading)] tracking-tighter leading-none">
+                            {{ projects.length }}
+                        </div>
+                        <p class="font-sans text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.18em] uppercase text-[var(--muted)] mt-2">TOTAL KARYA DATABASE</p>
+                    </div>
+
+                    <!-- Website Projects -->
+                    <div class="p-4 sm:p-8 border border-[var(--border-subtle)] bg-[var(--bg)] relative overflow-hidden group hover:border-[var(--heading)] transition-colors">
+                        <div class="flex justify-between items-baseline mb-4 sm:mb-6 border-b border-[var(--border-subtle)] pb-2 sm:pb-3">
+                            <span class="font-mono text-[8px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] uppercase text-[var(--muted)] font-semibold">
+                                02 / WEB DEV
+                            </span>
+                            <span class="font-mono text-[8px] sm:text-[9px] text-blue-400 tracking-widest uppercase font-semibold">WEB</span>
+                        </div>
+                        <div class="display-font text-4xl sm:text-6xl font-black text-[var(--heading)] tracking-tighter leading-none">
+                            {{ websiteCount }}
+                        </div>
+                        <p class="font-sans text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.18em] uppercase text-[var(--muted)] mt-2">FRONTEND &amp; FULLSTACK</p>
+                    </div>
+
+                    <!-- Unity Projects -->
+                    <div class="p-4 sm:p-8 border border-[var(--border-subtle)] bg-[var(--bg)] relative overflow-hidden group hover:border-[var(--heading)] transition-colors">
+                        <div class="flex justify-between items-baseline mb-4 sm:mb-6 border-b border-[var(--border-subtle)] pb-2 sm:pb-3">
+                            <span class="font-mono text-[8px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] uppercase text-[var(--muted)] font-semibold">
+                                03 / GAME 3D
+                            </span>
+                            <span class="font-mono text-[8px] sm:text-[9px] text-purple-400 tracking-widest uppercase font-semibold">UNITY</span>
+                        </div>
+                        <div class="display-font text-4xl sm:text-6xl font-black text-[var(--heading)] tracking-tighter leading-none">
+                            {{ unityCount }}
+                        </div>
+                        <p class="font-sans text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.18em] uppercase text-[var(--muted)] mt-2">UNITY 3D &amp; GAME</p>
+                    </div>
+
+                    <!-- System Status -->
+                    <div class="p-4 sm:p-8 border border-[var(--border-subtle)] bg-[var(--bg)] relative overflow-hidden group hover:border-[var(--heading)] transition-colors col-span-1 sm:col-span-1">
+                        <div class="flex justify-between items-baseline mb-4 sm:mb-6 border-b border-[var(--border-subtle)] pb-2 sm:pb-3">
+                            <span class="font-mono text-[8px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] uppercase text-[var(--muted)] font-semibold">
+                                04 / BACKEND
+                            </span>
+                            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <div class="display-font text-2xl sm:text-4xl font-black text-emerald-400 tracking-tighter leading-none uppercase">
+                            200 OK
+                        </div>
+                        <p class="font-sans text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.18em] uppercase text-[var(--muted)] mt-2 sm:mt-3">REST API ONLINE</p>
+                    </div>
+                </div>
+
+                <!-- Toolbar Controls: Typography Search & Filter Strip -->
+                <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-[var(--border-subtle)]">
+                    <!-- Search Bar -->
+                    <div class="relative flex-1">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] font-mono text-[10px] sm:text-xs">
+                            SEARCH:
+                        </div>
+                        <input v-model="searchQuery" type="text" placeholder="Filter title, description, stack..."
+                            class="w-full bg-[var(--bg)] border-2 border-[var(--border-subtle)] pl-20 sm:pl-24 pr-8 py-2.5 sm:py-3 font-sans text-xs text-[var(--heading)] focus:border-[var(--heading)] focus:outline-none transition-colors placeholder:text-[var(--muted)]/50 uppercase tracking-wider font-medium" />
+                        <button v-if="searchQuery" @click="searchQuery = ''"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-[var(--muted)] hover:text-[var(--heading)] font-bold">
+                            ✕
+                        </button>
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+                        <button v-for="cat in categories" :key="cat" @click="selectedCategory = cat"
+                            class="font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-2 sm:px-4 sm:py-2.5 border border-[var(--border-subtle)] transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 font-semibold"
+                            :class="selectedCategory === cat
+                                ? 'bg-[var(--heading)] text-[var(--bg)] font-black border-[var(--heading)] shadow-md'
+                                : 'text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)]'">
+                            <span>{{ cat }}</span>
+                            <span class="text-[8px] opacity-70">
+                                [{{ cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length }}]
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Projects Index View (Responsive Card Stack for Mobile, High-Contrast Data Table for Tablet/Desktop) -->
+                <div class="border-2 border-[var(--heading)] bg-[var(--bg)] overflow-hidden shadow-2xl">
+                    <!-- Loading State -->
+                    <div v-if="isLoading" class="py-20 sm:py-28 text-center">
+                        <div class="inline-block w-7 h-7 sm:w-8 sm:h-8 border-2 border-[var(--heading)] border-t-transparent rounded-full animate-spin mb-4"></div>
+                        <p class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                            FETCHING KARYA FROM BACKEND REST API...
+                        </p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div v-else-if="filteredProjects.length === 0" class="py-20 sm:py-28 text-center px-4">
+                        <p class="display-font text-3xl sm:text-5xl font-black text-[var(--muted)] uppercase mb-3 tracking-tight">NO KARYA FOUND</p>
+                        <p class="font-sans text-xs text-[var(--muted)] max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed">
+                            Tidak ada karya yang cocok dengan kata kunci "{{ searchQuery }}". Sesuaikan filter atau tambah karya baru.
+                        </p>
+                        <button @click="openCreateModal"
+                            class="font-sans text-xs tracking-[0.2em] uppercase px-6 py-3 bg-[var(--heading)] text-[var(--bg)] font-black hover:opacity-90">
+                            + CREATE NEW WORK
+                        </button>
+                    </div>
+
+                    <!-- Data View -->
+                    <div v-else>
+                        <!-- Mobile Responsive Card View (< md) -->
+                        <div class="block md:hidden divide-y divide-[var(--border-subtle)]">
+                            <div v-for="(proj, idx) in filteredProjects" :key="proj.id" class="p-5 space-y-3 bg-[var(--bg)]">
+                                <div class="flex items-start justify-between gap-3">
+                                    <div>
+                                        <div class="flex items-center gap-2 font-mono text-[9px] text-[var(--muted)] mb-1">
+                                            <span>0{{ idx + 1 }}</span>
+                                            <span>•</span>
+                                            <span>RELEASE {{ proj.year }}</span>
+                                        </div>
+                                        <h3 class="display-font text-2xl font-black uppercase text-[var(--heading)] tracking-tight leading-none">
+                                            {{ proj.title }}
+                                        </h3>
+                                    </div>
+                                    <span class="font-mono text-[8px] tracking-wider uppercase px-2 py-0.5 border border-[var(--heading)] font-bold shrink-0"
+                                        :class="proj.category === 'Website'
+                                            ? 'bg-blue-950/20 text-blue-400 border-blue-500/40'
+                                            : (proj.category === 'Unity' ? 'bg-purple-950/20 text-purple-400 border-purple-500/40' : 'bg-[var(--bg)] text-[var(--heading)]')">
+                                        {{ proj.category }}
+                                    </span>
+                                </div>
+
+                                <p class="font-sans text-xs text-[var(--text-soft)] leading-relaxed">
+                                    {{ proj.desc }}
+                                </p>
+
+                                <div v-if="proj.tags && proj.tags.length > 0" class="flex flex-wrap gap-1 pt-1">
+                                    <span v-for="tag in proj.tags" :key="tag"
+                                        class="font-mono text-[8px] tracking-wider uppercase px-2 py-0.5 border border-[var(--border-subtle)] text-[var(--muted)] font-semibold bg-[var(--bg)]">
+                                        {{ tag }}
+                                    </span>
+                                </div>
+
+                                <div class="flex items-center justify-end gap-2 pt-3 border-t border-[var(--border-subtle)]/50">
+                                    <button @click="triggerEdit(proj)"
+                                        class="font-sans text-[9px] tracking-[0.18em] uppercase px-3.5 py-1.5 border border-[var(--heading)] text-[var(--heading)] font-black active:bg-[var(--heading)] active:text-[var(--bg)]">
+                                        EDIT
+                                    </button>
+                                    <button @click="deleteProject(proj)"
+                                        class="font-sans text-[9px] tracking-[0.18em] uppercase px-3.5 py-1.5 border border-red-900/50 text-red-400 font-bold active:bg-red-950">
+                                        DELETE
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Data Table View (>= md) -->
+                        <div class="hidden md:block overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b-2 border-[var(--heading)] bg-[var(--hover-bg)] font-mono text-[10px] tracking-[0.25em] uppercase text-[var(--heading)] select-none">
+                                        <th class="py-4 px-6 font-bold w-16"># INDEX</th>
+                                        <th class="py-4 px-6 font-bold">KARYA TITLE &amp; EDITORIAL SUMMARY</th>
+                                        <th class="py-4 px-6 font-bold">CATEGORY</th>
+                                        <th class="py-4 px-6 font-bold">YEAR</th>
+                                        <th class="py-4 px-6 font-bold">STACK / TAGS</th>
+                                        <th class="py-4 px-6 font-bold text-right">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-[var(--border-subtle)]">
+                                    <tr v-for="(proj, idx) in filteredProjects" :key="proj.id"
+                                        class="hover:bg-[var(--hover-bg)] transition-colors group border-l-4 border-l-transparent hover:border-l-[var(--heading)]">
+                                        <!-- Index -->
+                                        <td class="py-6 px-6 font-mono text-xs text-[var(--muted)] tabular-nums font-semibold">
+                                            0{{ idx + 1 }}
+                                        </td>
+
+                                        <!-- Title & Description with Image Preview -->
+                                        <td class="py-6 px-6 max-w-md">
+                                            <div class="flex items-start gap-4">
+                                                <div v-if="proj.image" class="w-14 h-14 bg-[var(--hover-bg)] border border-[var(--border-subtle)] overflow-hidden shrink-0">
+                                                    <img :src="proj.image" :alt="proj.title" class="w-full h-full object-cover" />
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <h3 class="display-font text-2xl font-black uppercase text-[var(--heading)] group-hover:text-[var(--accent-blue)] transition-colors tracking-tight leading-none mb-1.5 truncate">
+                                                        {{ proj.title }}
+                                                    </h3>
+                                                    <p class="font-sans text-xs text-[var(--text-soft)] leading-relaxed line-clamp-2">
+                                                        {{ proj.desc }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <!-- Category Badge -->
+                                        <td class="py-6 px-6 whitespace-nowrap">
+                                            <span class="font-mono text-[9px] tracking-[0.2em] uppercase px-3 py-1 border border-[var(--heading)] font-bold transition-colors"
+                                                :class="proj.category === 'Website'
+                                                    ? 'bg-blue-950/20 text-blue-400 border-blue-500/40'
+                                                    : (proj.category === 'Unity' ? 'bg-purple-950/20 text-purple-400 border-purple-500/40' : 'bg-[var(--bg)] text-[var(--heading)]')">
+                                                {{ proj.category }}
+                                            </span>
+                                        </td>
+
+                                        <!-- Year -->
+                                        <td class="py-6 px-6 font-mono text-xs text-[var(--heading)] tabular-nums whitespace-nowrap font-bold">
+                                            {{ proj.year }}
+                                        </td>
+
+                                        <!-- Tags Pills -->
+                                        <td class="py-6 px-6">
+                                            <div class="flex flex-wrap gap-1.5 max-w-xs">
+                                                <span v-for="tag in proj.tags" :key="tag"
+                                                    class="font-mono text-[9px] tracking-wider uppercase px-2 py-0.5 border border-[var(--border-subtle)] text-[var(--muted)] font-semibold bg-[var(--bg)]">
+                                                    {{ tag }}
+                                                </span>
+                                            </div>
+                                        </td>
+
+                                        <!-- Action Buttons -->
+                                        <td class="py-6 px-6 text-right whitespace-nowrap">
+                                            <div class="inline-flex items-center gap-3">
+                                                <button @click="triggerEdit(proj)"
+                                                    class="font-sans text-[10px] tracking-[0.2em] uppercase px-4 py-2 border border-[var(--heading)] text-[var(--heading)] hover:bg-[var(--heading)] hover:text-[var(--bg)] font-black transition-all cursor-pointer">
+                                                    EDIT
+                                                </button>
+                                                <button @click="deleteProject(proj)"
+                                                    class="font-sans text-[10px] tracking-[0.2em] uppercase px-4 py-2 border border-red-900/50 text-red-400 hover:bg-red-950/80 hover:border-red-500 font-bold transition-all cursor-pointer">
+                                                    DELETE
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Project Modal Component -->
+            <ProjectManagerModal
+                ref="modalRef"
+                :is-open="isModalOpen"
+                @close="isModalOpen = false"
+                @updated="fetchProjects"
+            />
+        </template>
+    </div>
+</template>
+
+<script setup>
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import ProjectManagerModal from '../components/ProjectManagerModal.vue';
+
+const isAuthenticated = ref(false);
+const pinInput = ref('');
+const showPin = ref(false);
+const isVerifying = ref(false);
+const authError = ref('');
+
+const projects = ref([]);
+const isLoading = ref(true);
+const isModalOpen = ref(false);
+const searchQuery = ref('');
+const selectedCategory = ref('All');
+const modalRef = ref(null);
+const liveTime = ref('');
+
+let clockTimer = null;
+
+const checkExistingAuth = () => {
+    const token = sessionStorage.getItem('admin_token');
+    if (token) {
+        isAuthenticated.value = true;
+        fetchProjects();
+    }
+};
+
+const verifyPin = async () => {
+    isVerifying.value = true;
+    authError.value = '';
+
+    try {
+        const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ pin: pinInput.value }),
+        });
+
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+            sessionStorage.setItem('admin_token', json.token);
+            isAuthenticated.value = true;
+            pinInput.value = '';
+            fetchProjects();
+        } else {
+            authError.value = json.message || 'Invalid Security PIN. Access denied.';
+        }
+    } catch (err) {
+        authError.value = 'Failed to connect to authentication service.';
+    } finally {
+        isVerifying.value = false;
+    }
+};
+
+const logout = () => {
+    sessionStorage.removeItem('admin_token');
+    isAuthenticated.value = false;
+    pinInput.value = '';
+    authError.value = '';
+};
+
+const updateClock = () => {
+    const now = new Date();
+    liveTime.value = now.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    }) + ' LOCAL';
+};
+
+const fetchProjects = async () => {
+    isLoading.value = true;
+    try {
+        const res = await fetch('/api/projects');
+        const json = await res.json();
+        if (json.success) {
+            projects.value = json.data;
+        }
+    } catch (err) {
+        console.error('Failed to load projects:', err);
+    } finally {
+        isLoading.value = false;
+    }
+};
+
+const websiteCount = computed(() =>
+    projects.value.filter(p => p.category.toLowerCase() === 'website').length
+);
+
+const unityCount = computed(() =>
+    projects.value.filter(p => p.category.toLowerCase() === 'unity').length
+);
+
+const categories = computed(() => {
+    const set = new Set(projects.value.map(p => p.category));
+    return ['All', ...Array.from(set)];
+});
+
+const filteredProjects = computed(() => {
+    return projects.value.filter(proj => {
+        const matchesCategory = selectedCategory.value === 'All' || proj.category === selectedCategory.value;
+        const q = searchQuery.value.toLowerCase().trim();
+        if (!q) return matchesCategory;
+
+        const matchesTitle = proj.title.toLowerCase().includes(q);
+        const matchesDesc = proj.desc.toLowerCase().includes(q);
+        const matchesTag = Array.isArray(proj.tags) && proj.tags.some(t => t.toLowerCase().includes(q));
+
+        return matchesCategory && (matchesTitle || matchesDesc || matchesTag);
+    });
+});
+
+const openCreateModal = () => {
+    isModalOpen.value = true;
+    if (modalRef.value) {
+        modalRef.value.openCreateForm();
+    }
+};
+
+const triggerEdit = (proj) => {
+    isModalOpen.value = true;
+    if (modalRef.value) {
+        modalRef.value.openEditForm(proj);
+    }
+};
+
+const deleteProject = async (proj) => {
+    if (!confirm(`Are you sure you want to delete "${proj.title}"?`)) return;
+
+    try {
+        const res = await fetch(`/api/projects/${proj.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+        const json = await res.json();
+        if (res.ok && json.success) {
+            await fetchProjects();
+        } else {
+            alert(json.message || 'Failed to delete project.');
+        }
+    } catch (err) {
+        alert('An error occurred during deletion.');
+    }
+};
+
+onMounted(() => {
+    checkExistingAuth();
+    updateClock();
+    clockTimer = setInterval(updateClock, 1000);
+});
+
+onBeforeUnmount(() => {
+    if (clockTimer) clearInterval(clockTimer);
+});
+</script>
+
+<style scoped>
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+.animate-shake {
+    animation: shake 0.4s ease-in-out;
+}
+</style>
