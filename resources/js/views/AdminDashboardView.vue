@@ -11,111 +11,91 @@
 
         <!-- 🔒 AUTHENTICATION LOCK SCREEN (If Not Authenticated) -->
         <div v-if="!isAuthenticated"
-            class="min-h-[100dvh] flex items-center justify-center px-4 py-8 sm:p-8 relative z-30 overflow-hidden">
-            <!-- Massive Display Typography Background Watermark -->
-            <h1
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-black uppercase tracking-tighter text-[var(--heading)]/[0.03] display-font text-[28vw] sm:text-[20vw] leading-none select-none pointer-events-none whitespace-nowrap z-0">
-                RESTRICTED
-            </h1>
+            class="fixed inset-0 h-[100dvh] w-full flex flex-col justify-between p-4 sm:p-6 md:p-8 lg:p-10 z-30 overflow-hidden bg-[var(--bg)] select-none">
 
-            <div
-                class="w-full max-w-xl bg-[var(--bg)] border-2 border-[var(--heading)] p-6 sm:p-12 relative z-10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] transition-all">
-                <!-- Hairline Top Status Bar -->
-                <div
-                    class="flex items-center justify-between pb-4 mb-6 sm:pb-6 sm:mb-8 border-b border-[var(--border-subtle)] font-mono text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[var(--muted)]">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                        <span class="text-red-400 font-bold">SECURITY PROTOCOL</span>
-                    </div>
-                    <span>Access Denied</span>
+            <!-- Hairline Top Frame / Architectural Breadcrumb -->
+            <header
+                class="shrink-0 w-full max-w-4xl mx-auto flex items-center justify-between pb-3 sm:pb-4 border-b border-[var(--border-subtle)] font-mono text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-[var(--muted)]">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--heading)] opacity-60"></span>
+                    <span class="text-[var(--text-soft)] font-medium">AUTHORIZATION GATEWAY</span>
                 </div>
+                <div class="flex items-center gap-3">
+                    <span class="hidden sm:inline opacity-40">PORTFOLIO OS //</span>
+                    <span class="text-[var(--heading)] font-semibold">RESTRICTED ACCESS</span>
+                </div>
+            </header>
 
-                <!-- Editorial Headline Stack -->
-                <div class="mb-8 sm:mb-10">
+            <!-- Main Central Typographic Focus Area -->
+            <main class="shrink-0 w-full max-w-lg mx-auto my-auto py-2 sm:py-4">
+                <!-- Eyebrow & Headline -->
+                <div class="mb-4 sm:mb-6">
                     <span
-                        class="font-mono text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] text-[var(--muted)] uppercase block mb-2 sm:mb-3">
-                        00 / AUTHORIZATION GATE
+                        class="font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase block mb-1.5 sm:mb-2">
+                        001 / SYSTEM VERIFICATION
                     </span>
-                    <h2
-                        class="display-font text-4xl sm:text-7xl font-black uppercase tracking-tighter text-[var(--heading)] leading-[0.88] mb-3 sm:mb-4">
-                        SYSTEM<br />ACCESS
-                    </h2>
+                    <h1
+                        class="display-font text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tighter text-[var(--heading)] leading-[0.85]">
+                        SYSTEM<br />ACCESS.
+                    </h1>
                 </div>
 
-                <!-- Error Alert (Classic Typographic Architectural Frame) -->
+                <!-- Error Notice (Minimal Typographic Accent) -->
                 <div v-if="authError"
-                    class="mb-6 sm:mb-8 relative border-2 border-red-500 bg-[#160406]/95 p-4 sm:p-5 text-red-100 shadow-[0_15px_35px_-10px_rgba(220,38,38,0.35)] animate-shake overflow-hidden">
-                    <!-- Corner Crosshairs -->
-                    <span class="absolute top-1 left-1.5 font-mono text-[9px] text-red-400/50 select-none">+</span>
-                    <span class="absolute top-1 right-1.5 font-mono text-[9px] text-red-400/50 select-none">+</span>
-                    <span class="absolute bottom-1 left-1.5 font-mono text-[9px] text-red-400/50 select-none">+</span>
-                    <span class="absolute bottom-1 right-1.5 font-mono text-[9px] text-red-400/50 select-none">+</span>
-
-                    <div class="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-red-500/30 font-mono text-[8px] sm:text-[9px] tracking-[0.25em] uppercase text-red-400">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                            <span class="font-bold">SECURITY EXCEPTION</span>
-                        </div>
-                        <span class="px-1.5 py-0.5 border border-red-500/40 bg-red-950 font-semibold tracking-widest text-[8px]">
-                            ERR_401_DENIED
-                        </span>
+                    class="mb-4 p-2.5 sm:p-3 border-l-2 border-red-500 bg-red-500/5 text-red-300 font-mono text-xs flex items-center justify-between gap-3 transition-all">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="text-red-500 font-bold shrink-0">!</span>
+                        <span class="tracking-wide truncate">{{ authError }}</span>
                     </div>
-
-                    <div class="flex items-start justify-between gap-3">
-                        <div>
-                            <h4 class="display-font text-lg sm:text-xl font-black uppercase tracking-tight text-white leading-tight mb-0.5">
-                                AUTHENTICATION FAILED
-                            </h4>
-                            <p class="font-sans text-xs text-red-200/90 leading-relaxed font-light">
-                                {{ authError }}
-                            </p>
-                        </div>
-                        <button @click="authError = ''" class="text-red-400 hover:text-white p-1 font-mono text-xs font-bold cursor-pointer transition-colors" title="Dismiss">
-                            ✕
-                        </button>
-                    </div>
+                    <button @click="authError = ''" type="button"
+                        class="text-red-400 hover:text-white uppercase tracking-widest text-[9px] shrink-0 cursor-pointer font-bold transition-colors">
+                        [CLOSE]
+                    </button>
                 </div>
 
-                <!-- Typography-Driven PIN Form -->
-                <form @submit.prevent="verifyPin" class="space-y-6 sm:space-y-8">
-                    <div>
-                        <div class="flex justify-between items-baseline mb-2 sm:mb-3">
+                <!-- Minimalist Typographic Form -->
+                <form @submit.prevent="verifyPin" class="space-y-4 sm:space-y-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-baseline">
                             <label
-                                class="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] text-[var(--muted)] uppercase">
+                                class="font-mono text-[8px] sm:text-[9px] tracking-[0.25em] text-[var(--muted)] uppercase">
                                 ENTER SECURITY PIN
                             </label>
-
-                        </div>
-
-                        <div class="relative group">
-                            <input v-model="pinInput" :type="showPin ? 'text' : 'password'" required autofocus
-                                placeholder="• • • • • •"
-                                class="w-full bg-[var(--bg)] border-b-2 border-[var(--border-subtle)] focus:border-[var(--heading)] px-2 py-3 sm:py-4 font-mono text-xl sm:text-3xl tracking-[0.3em] sm:tracking-[0.35em] text-[var(--heading)] focus:outline-none transition-colors placeholder:text-[var(--muted)]/20 pr-16 sm:pr-20" />
                             <button type="button" @click="showPin = !showPin"
-                                class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 font-mono text-[9px] sm:text-[10px] tracking-widest text-[var(--muted)] hover:text-[var(--heading)] uppercase px-2 py-1 border border-[var(--border-subtle)] transition-colors">
-                                {{ showPin ? 'HIDE' : 'SHOW' }}
+                                class="font-mono text-[8px] sm:text-[9px] tracking-widest text-[var(--muted)] hover:text-[var(--heading)] uppercase transition-colors cursor-pointer">
+                                [{{ showPin ? 'HIDE KEY' : 'SHOW KEY' }}]
                             </button>
                         </div>
+
+                        <!-- Minimal Typographic Input Container -->
+                        <div
+                            class="relative border-b border-[var(--border-subtle)] focus-within:border-[var(--heading)] transition-colors duration-300">
+                            <input v-model="pinInput" :type="showPin ? 'text' : 'password'" required autofocus
+                                inputmode="numeric" pattern="[0-9]*" placeholder="••••••"
+                                class="w-full bg-transparent px-0 py-2 sm:py-3 font-mono text-xl sm:text-3xl tracking-[0.35em] sm:tracking-[0.45em] text-[var(--heading)] focus:outline-none transition-colors placeholder:text-[var(--muted)]/20" />
+                        </div>
                     </div>
 
-                    <div class="pt-2">
-                        <button type="submit" :disabled="isVerifying"
-                            class="w-full font-sans text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.25em] uppercase py-4 sm:py-5 bg-[var(--heading)] text-[var(--bg)] font-black hover:opacity-90 transition-all cursor-pointer shadow-xl active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 sm:gap-3">
-                            <span>{{ isVerifying ? 'VERIFYING...' : 'UNLOCK MANAGEMENT CONSOLE →' }}</span>
-                        </button>
-                    </div>
+                    <!-- Clean Typographic Action CTA -->
+                    <button type="submit" :disabled="isVerifying"
+                        class="group w-full py-3.5 sm:py-4 border border-[var(--heading)] bg-[var(--heading)] text-[var(--bg)] hover:bg-transparent hover:text-[var(--heading)] font-sans text-xs sm:text-sm font-black uppercase tracking-[0.22em] transition-all duration-300 flex items-center justify-between px-5 sm:px-6 cursor-pointer disabled:opacity-40 disabled:pointer-events-none active:scale-[0.99] shadow-sm">
+                        <span>{{ isVerifying ? 'AUTHENTICATING...' : 'AUTHENTICATE & ENTER' }}</span>
+                        <span
+                            class="font-mono text-base transform group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                    </button>
                 </form>
+            </main>
 
-                <!-- Footer Return Anchor -->
-                <div
-                    class="mt-8 sm:mt-12 pt-5 sm:pt-6 border-t border-[var(--border-subtle)] flex items-center justify-between font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[var(--muted)]">
-                    <router-link to="/"
-                        class="hover:text-[var(--heading)] transition-colors inline-flex items-center gap-1.5 font-sans text-xs tracking-[0.1em] sm:tracking-[0.15em]">
-                        <span>←</span> RETURN TO PORTFOLIO
-                    </router-link>
-                    <span class="opacity-50">SHA-256 SECURED</span>
-                </div>
-            </div>
+            <!-- Bottom Hairline Footer Frame -->
+            <footer
+                class="shrink-0 w-full max-w-4xl mx-auto flex items-center justify-between pt-3 sm:pb-1 border-t border-[var(--border-subtle)] font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[var(--muted)]">
+                <router-link to="/"
+                    class="hover:text-[var(--heading)] transition-colors inline-flex items-center gap-1.5 font-sans text-[11px] sm:text-xs tracking-[0.12em] font-medium group">
+                    <span class="group-hover:-translate-x-1 transition-transform">←</span>
+                    <span>RETURN TO PORTFOLIO</span>
+                </router-link>
+                <span class="opacity-40 hidden sm:inline">SHA-256 SECURED ENVIRONMENT</span>
+            </footer>
         </div>
 
         <!-- 🔓 DASHBOARD MAIN WORKSPACE (If Authenticated) -->
@@ -163,6 +143,12 @@
                             class="font-sans text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-2 sm:px-5 sm:py-2.5 border border-[var(--border-subtle)] text-[var(--text-soft)] hover:text-[var(--heading)] hover:border-[var(--heading)] hover:bg-[var(--hover-bg)] transition-all flex items-center gap-1.5 group font-semibold">
                             <span class="group-hover:-translate-x-1 transition-transform">←</span> PORTFOLIO
                         </router-link>
+
+                        <button @click="changePinRef?.open()"
+                            class="font-sans text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-2 sm:px-4 sm:py-2.5 border border-[var(--border-subtle)] text-[var(--text-soft)] hover:text-[var(--heading)] hover:border-[var(--heading)] hover:bg-[var(--hover-bg)] transition-all cursor-pointer font-semibold flex items-center gap-1.5"
+                            title="Manage Security PIN">
+                            <span>🔑</span> <span class="hidden sm:inline">PIN</span>
+                        </button>
 
                         <button @click="logout"
                             class="font-sans text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-2 sm:px-4 sm:py-2.5 border border-red-900/40 text-red-400 hover:bg-red-950/40 hover:border-red-600 transition-all cursor-pointer font-semibold flex items-center gap-1"
@@ -322,24 +308,30 @@
                     <span class="absolute top-1 left-1.5 font-mono text-[9px] text-amber-400/50 select-none">+</span>
                     <span class="absolute top-1 right-1.5 font-mono text-[9px] text-amber-400/50 select-none">+</span>
                     <span class="absolute bottom-1 left-1.5 font-mono text-[9px] text-amber-400/50 select-none">+</span>
-                    <span class="absolute bottom-1 right-1.5 font-mono text-[9px] text-amber-400/50 select-none">+</span>
+                    <span
+                        class="absolute bottom-1 right-1.5 font-mono text-[9px] text-amber-400/50 select-none">+</span>
 
                     <div class="flex items-center gap-3 sm:gap-4 min-w-0">
-                        <div class="w-9 h-9 border border-amber-500/50 bg-amber-950/80 flex items-center justify-center font-mono text-xs font-bold text-amber-300 shrink-0">
+                        <div
+                            class="w-9 h-9 border border-amber-500/50 bg-amber-950/80 flex items-center justify-center font-mono text-xs font-bold text-amber-300 shrink-0">
                             0{{ selectedIds.length }}
                         </div>
                         <div>
-                            <div class="flex items-center gap-2 font-mono text-[8px] sm:text-[9px] tracking-[0.25em] text-amber-400 uppercase font-semibold">
+                            <div
+                                class="flex items-center gap-2 font-mono text-[8px] sm:text-[9px] tracking-[0.25em] text-amber-400 uppercase font-semibold">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                                 <span>STAGING QUEUE // BATCH PROTOCOL</span>
                             </div>
-                            <h4 class="display-font text-xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight truncate">
-                                {{ selectedIds.length }} {{ selectedIds.length === 1 ? 'WORK RECORD' : 'WORK RECORDS' }} SELECTED FOR PURGE
+                            <h4
+                                class="display-font text-xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight truncate">
+                                {{ selectedIds.length }} {{ selectedIds.length === 1 ? 'WORK RECORD' : 'WORK RECORDS' }}
+                                SELECTED FOR PURGE
                             </h4>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-2 sm:gap-3 shrink-0 self-end sm:self-auto w-full sm:w-auto justify-end">
+                    <div
+                        class="flex items-center gap-2 sm:gap-3 shrink-0 self-end sm:self-auto w-full sm:w-auto justify-end">
                         <button @click="selectedIds = []"
                             class="font-sans text-[10px] sm:text-xs tracking-[0.18em] uppercase px-4 py-2 border border-amber-500/50 hover:border-amber-300 text-amber-200 hover:text-white transition-all cursor-pointer font-bold">
                             DESELECT ALL
@@ -384,9 +376,10 @@
                         <div class="block md:hidden divide-y divide-[var(--border-subtle)]">
                             <div v-for="(proj, idx) in filteredProjects" :key="proj.id"
                                 class="p-5 space-y-3 bg-[var(--bg)] flex items-start gap-3">
-                                
+
                                 <!-- Mobile Checkbox Selection -->
-                                <input type="checkbox" :value="proj.id" v-model="selectedIds" class="mt-1 accent-white w-4 h-4 shrink-0 cursor-pointer" />
+                                <input type="checkbox" :value="proj.id" v-model="selectedIds"
+                                    class="mt-1 accent-white w-4 h-4 shrink-0 cursor-pointer" />
 
                                 <div class="flex-1 space-y-3">
                                     <div class="flex items-start justify-between gap-3">
@@ -444,7 +437,8 @@
                                     <tr
                                         class="border-b-2 border-[var(--heading)] bg-[var(--hover-bg)] font-mono text-[10px] tracking-[0.25em] uppercase text-[var(--heading)] select-none">
                                         <th class="py-4 px-6 font-bold w-12 text-center">
-                                            <input type="checkbox" v-model="selectAll" class="accent-white cursor-pointer w-4.5 h-4.5 align-middle" />
+                                            <input type="checkbox" v-model="selectAll"
+                                                class="accent-white cursor-pointer w-4.5 h-4.5 align-middle" />
                                         </th>
                                         <th class="py-4 px-6 font-bold w-16"># INDEX</th>
                                         <th class="py-4 px-6 font-bold">KARYA TITLE &amp; EDITORIAL SUMMARY</th>
@@ -457,10 +451,11 @@
                                 <tbody class="divide-y divide-[var(--border-subtle)]">
                                     <tr v-for="(proj, idx) in filteredProjects" :key="proj.id"
                                         class="hover:bg-[var(--hover-bg)] transition-colors group border-l-4 border-l-transparent hover:border-l-[var(--heading)]">
-                                        
+
                                         <!-- Selection Checkbox -->
                                         <td class="py-6 px-6 text-center">
-                                            <input type="checkbox" :value="proj.id" v-model="selectedIds" class="accent-white cursor-pointer w-4 h-4 align-middle" />
+                                            <input type="checkbox" :value="proj.id" v-model="selectedIds"
+                                                class="accent-white cursor-pointer w-4 h-4 align-middle" />
                                         </td>
 
                                         <!-- Index -->
@@ -543,15 +538,19 @@
 
             <!-- Classic Typographic SweetAlert Confirmation Modal -->
             <AdminConfirmModal ref="confirmRef" />
+
+            <!-- Security Credentials Modal -->
+            <AdminChangePinModal ref="changePinRef" @success="handlePinChanged" />
         </template>
     </div>
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import AdminToast from '../components/AdminToast.vue';
 import AdminConfirmModal from '../components/AdminConfirmModal.vue';
+import AdminChangePinModal from '../components/AdminChangePinModal.vue';
 
 const router = useRouter();
 
@@ -561,14 +560,33 @@ const showPin = ref(false);
 const isVerifying = ref(false);
 const authError = ref('');
 
+watch(
+    isAuthenticated,
+    (authenticated) => {
+        document.title = authenticated
+            ? 'Admin Dashboard'
+            : 'WARNING!!!';
+    },
+    { immediate: true }
+);
+
 const projects = ref([]);
 const isLoading = ref(true);
 const searchQuery = ref('');
 const selectedCategory = ref('All');
 const toastRef = ref(null);
 const confirmRef = ref(null);
+const changePinRef = ref(null);
 const liveTime = ref('');
 const selectedIds = ref([]);
+
+const handlePinChanged = () => {
+    toastRef.value?.show({
+        title: 'SECURITY UPDATED',
+        message: 'Admin security PIN has been re-hashed and stored in database.',
+        type: 'success',
+    });
+};
 
 let clockTimer = null;
 
@@ -857,4 +875,3 @@ onBeforeUnmount(() => {
     animation: shake 0.4s ease-in-out;
 }
 </style>
-

@@ -7,6 +7,11 @@
 
         <title>{{ config('app.name', 'Portfolio') }}</title>
 
+        <!-- Dynamic Favicon Icons -->
+        <link rel="icon" type="image/png" href="/images/whitelogo.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/png" href="/images/blacklogo.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" href="/images/whitelogo.png" />
+
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800,900&display=swap" rel="stylesheet" />
         <link href="https://fonts.bunny.net/css?family=manrope:300,400,500,600,700,800&display=swap" rel="stylesheet" />
