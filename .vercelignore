@@ -1,0 +1,11 @@
+.git
+.github
+.agents
+.impeccable
+node_modules
+tests
+phpunit.xml
+.env.example
+README.md
+PRODUCT.md
+DESIGN.md
