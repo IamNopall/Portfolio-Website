@@ -185,12 +185,43 @@ const handleDrop = (e) => {
     }
 };
 
+import { supabase } from '../composables/useSupabase.js';
+
 const uploadFile = async (file) => {
     isUploading.value = true;
-    const formData = new FormData();
-    formData.append('image', file);
 
     try {
+        // Generate unique filename with timestamp & extension
+        const fileExt = file.name.split('.').pop() || 'jpg';
+        const cleanName = file.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9]/g, "_");
+        const fileName = `${Date.now()}_${cleanName}.${fileExt}`;
+        const filePath = `projects/${fileName}`;
+
+        // Direct upload to Supabase Storage bucket 'portfolio'
+        const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('portfolio')
+            .upload(filePath, file, {
+                cacheControl: '3600',
+                upsert: true
+            });
+
+        if (!uploadError && uploadData) {
+            const { data: publicUrlData } = supabase.storage
+                .from('portfolio')
+                .getPublicUrl(filePath);
+
+            const publicUrl = publicUrlData?.publicUrl;
+            if (publicUrl) {
+                emit('update:modelValue', publicUrl);
+                emit('uploaded', publicUrl);
+                return;
+            }
+        }
+
+        // Fallback: Try local API if available
+        const formData = new FormData();
+        formData.append('image', file);
+
         const res = await fetch('/api/upload-media', {
             method: 'POST',
             headers: {
@@ -203,12 +234,30 @@ const uploadFile = async (file) => {
         if (res.ok && json.success && json.url) {
             emit('update:modelValue', json.url);
             emit('uploaded', json.url);
-        } else {
-            alert(json.message || 'Failed to upload image to server.');
+            return;
         }
+
+        // Ultimate fallback: FileReader Base64
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const base64Url = e.target?.result;
+            if (base64Url) {
+                emit('update:modelValue', base64Url);
+                emit('uploaded', base64Url);
+            }
+        };
+        reader.readAsDataURL(file);
     } catch (err) {
-        console.error('Image upload error:', err);
-        alert('Network error while uploading image.');
+        console.error('Image upload error, using local data URL fallback:', err);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const base64Url = e.target?.result;
+            if (base64Url) {
+                emit('update:modelValue', base64Url);
+                emit('uploaded', base64Url);
+            }
+        };
+        reader.readAsDataURL(file);
     } finally {
         isUploading.value = false;
         if (fileInputRef.value) {
