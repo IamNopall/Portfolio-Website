@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-04T00:02:45.000Z",
+  "title": "Design System: Naufal Tsaqif Engineering Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Signal Cobalt",
+        "canonical": "#3b82f6",
+        "tonalRamp": ["#1e3a8a", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd", "#bfdbfe", "#dbeafe"]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Obsidian Ground",
+        "canonical": "#0d0d0d",
+        "tonalRamp": ["#000000", "#0a0a0a", "#0d0d0d", "#171717", "#262626", "#404040", "#737373", "#a3a3a3"]
+      },
+      "neutral-heading": {
+        "role": "neutral",
+        "displayName": "Pure White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#737373", "#a3a3a3", "#d4d4d4", "#e5e5e5", "#f5f5f5", "#fafafa", "#ffffff", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Monumental titles and hero declarations."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section anchors and major headers."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Main editorial narrative and case study descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Monospace technical telemetry, status, and coordinates."
+      }
+    },
+    "shadows": [
+      {
+        "name": "dossier-frame",
+        "value": "0 25px 50px -12px rgba(0, 0, 0, 0.6)",
+        "purpose": "Grounded elevation for architectural media containers."
+      },
+      {
+        "name": "glass-overlay",
+        "value": "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+        "purpose": "Translucent depth under floating badges."
+      }
+    ],
+    "motion": [
+      {
+        "name": "scrub-differential",
+        "value": "linear",
+        "purpose": "GSAP ScrollTrigger scrub for parallax depth."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid high-contrast action pill.",
+      "html": "<button class=\"ds-btn-primary\">EXPLORE CASE STUDIES &darr;</button>",
+      "css": ".ds-btn-primary { background: #ffffff; color: #0d0d0d; padding: 14px 24px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; transition: opacity 0.2s ease; } .ds-btn-primary:hover { opacity: 0.9; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Hairline-bordered link pill.",
+      "html": "<button class=\"ds-btn-ghost\">GITHUB ARCHIVE &nearr;</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #ffffff; padding: 14px 24px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(255, 255, 255, 0.15); cursor: pointer; transition: all 0.2s ease; } .ds-btn-ghost:hover { border-color: #ffffff; background: rgba(255, 255, 255, 0.04); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Architectural Monograph Dossier",
+    "overview": "An editorial, high-craft digital monograph designed to showcase full-stack engineering and spatial creative technology. Deep obsidian voids, razor-sharp hairlines, and monumental typography create an uncompromisingly cinematic stage where interactive prototypes and real technical case studies lead the viewer.",
+    "keyCharacteristics": [
+      "Unforgiving typographic discipline with ultra-condensed display scale.",
+      "Deep obsidian foundation with purposeful electric cobalt focal points and luminous live telemetry indicators.",
+      "Asymmetric architectural layouts pairing dense data rails with generous negative space.",
+      "Kinetic differential scroll scrub orchestrated via GSAP, giving media frames weight and physical presence."
+    ],
+    "rules": [
+      {
+        "name": "The Surgical Accent Rule",
+        "body": "Cobalt (#3b82f6) occupies <=3% of any viewport. Its scarcity is what gives it authoritative focus.",
+        "section": "colors"
+      },
+      {
+        "name": "The Eyebrow Ban Rule",
+        "body": "Section titles carry their own gravity. Banned decorative prefixes ('01 / INDEX') are replaced with functional metadata rails.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do preserve the 4:5 portrait aspect ratio for the dossier photographic container.",
+      "Do maintain strict monochrome contrast for narrative copy (minimum 4.5:1 ratio).",
+      "Do use live status indicators (emerald pulsing dot) for authentic availability signals.",
+      "Do calibrate GSAP scrub speeds to feel organic and responsive to scroll velocity."
+    ],
+    "donts": [
+      "Don't reintroduce fake floor oval shadows or cutout standee silhouettes on rectangular photography.",
+      "Don't use decorative gradient text fills; emphasis is achieved through weight and scale.",
+      "Don't crowd display typography; ensure line-height remains tightly disciplined (0.86-0.95) with adequate bottom breathing room."
+    ]
+  }
+}

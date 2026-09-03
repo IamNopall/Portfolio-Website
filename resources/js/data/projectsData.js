@@ -89,7 +89,7 @@ export const curatedCaseStudies = {
                 caption: 'Zero-latency equipment management system with haptic pulse confirmation.'
             }
         ],
-        githubUrl: 'https://github.com/NaufalTsaqifUNS',
+        githubUrl: 'https://github.com/IamNopall',
         liveUrl: null,
         documentationUrl: null
     },
@@ -149,7 +149,7 @@ export const curatedCaseStudies = {
                 caption: 'Atmospheric hero vista showcasing void particle fields and monolithic architecture.'
             }
         ],
-        githubUrl: 'https://github.com/NaufalTsaqifUNS',
+        githubUrl: 'https://github.com/IamNopall',
         liveUrl: null,
         documentationUrl: null
     },
@@ -209,7 +209,7 @@ export const curatedCaseStudies = {
                 caption: 'High-contrast typography layout featuring custom Mixtape Condensed display type.'
             }
         ],
-        githubUrl: 'https://github.com/NaufalTsaqifUNS',
+        githubUrl: 'https://github.com/IamNopall',
         liveUrl: 'https://nopal.dev',
         documentationUrl: null
     },
@@ -255,7 +255,7 @@ export const curatedCaseStudies = {
             ]
         },
         gallery: [],
-        githubUrl: 'https://github.com/NaufalTsaqifUNS',
+        githubUrl: 'https://github.com/IamNopall',
         liveUrl: null,
         documentationUrl: null
     },
@@ -299,7 +299,7 @@ export const curatedCaseStudies = {
             ]
         },
         gallery: [],
-        githubUrl: 'https://github.com/NaufalTsaqifUNS',
+        githubUrl: 'https://github.com/IamNopall',
         liveUrl: null,
         documentationUrl: null
     },
@@ -343,7 +343,7 @@ export const curatedCaseStudies = {
             ]
         },
         gallery: [],
-        githubUrl: 'https://github.com/NaufalTsaqifUNS',
+        githubUrl: 'https://github.com/IamNopall',
         liveUrl: null,
         documentationUrl: null
     }

@@ -60,53 +60,19 @@
     --cursor-dot: #1d4ed8;
 }
 
-/* Standee Theme Swapping & Scroll Pop-Up Animation */
+/* Standee Positioning */
 .standee-dark,
 .standee-light,
 .standee-light-shadow {
     position: absolute;
     bottom: 100px;
     left: 50%;
-    transform: translateX(-50%) translateY(40px) scale(0.92);
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-50%);
     will-change: transform, opacity;
 }
 
-.standee-container.is-visible .standee-dark {
+.standee-dark {
     opacity: 0.9;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0) scale(1);
-}
-
-.standee-container.is-visible .standee-light {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-50%) translateY(0) scale(1);
-}
-
-.standee-container.is-visible .standee-light-shadow {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-50%) translateY(0) scale(1);
-}
-
-html.light-mode .standee-container.is-visible .standee-dark {
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
-
-html.light-mode .standee-container.is-visible .standee-light {
-    opacity: 0.95 !important;
-    visibility: visible !important;
-    transform: translateX(-50%) translateY(0) scale(1) !important;
-}
-
-html.light-mode .standee-container.is-visible .standee-light-shadow {
-    opacity: 0.45 !important;
-    visibility: visible !important;
-    transform: translateX(-50%) translateY(0) scale(1) !important;
 }
 
 *,

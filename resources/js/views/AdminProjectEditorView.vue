@@ -614,17 +614,6 @@ const isLoadingData = ref(false);
 const toastRef = ref(null);
 const confirmRef = ref(null);
 const liveTime = ref('');
-
-watch(
-    () => [isEditMode.value, form.value.title],
-    ([editMode, title]) => {
-        document.title = editMode
-            ? `${title || 'Edit Project'} - Admin Console`
-            : 'New Case Study - Admin Console';
-    },
-    { immediate: true }
-);
-
 let clockTimer = null;
 
 const presetCategories = ['VR Development', 'Unity', 'Website', 'Mobile', 'Design'];
@@ -661,6 +650,16 @@ const form = ref({
     live_url: '',
     documentation_url: '',
 });
+
+watch(
+    () => [isEditMode.value, form.value.title],
+    ([editMode, title]) => {
+        document.title = editMode
+            ? `${title || 'Edit Project'} - Admin Console`
+            : 'New Case Study - Admin Console';
+    },
+    { immediate: true }
+);
 
 const tagsInput = ref('');
 

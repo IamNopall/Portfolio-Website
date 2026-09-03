@@ -19,6 +19,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        <!--
+        THESIS: Replaces the hollow cutout standee slot with an architectural monograph dossier—pairing real mountain summit portraiture with technical telemetry, live availability signals, and kinetic parallax hierarchy, refusing generic cookie-cutter portfolio cards.
+        OWN-WORLD: Obsidian backdrop (#09090b), zinc-800 architectural hairlines, pure white display typography, cobalt focal accents (#2563eb), and tactile glass telemetry cards with subtle border glow.
+        STORY: Visitors immediately grasp Naufal's persona as an engineering craftsman: viewing real summit photography framed by geographic coordinates, technical discipline badges, and living availability status before reading the core mission statement.
+        FIRST VIEWPORT: Left: Monumental display statement ('ARCHITECTING SYSTEMS INTO REALITIES') with live coordinate badge; Center/Right: Architectural vertical dossier frame housing guwe.jpeg with parallax depth scrub and floating telemetry tags; Right/Bottom: Concise engineering manifesto and direct project index anchors.
+        FORM: Editorial Architectural Monograph Dossier with kinetic scrub, seed 0904e589.
+        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+        -->
         <div id="app"></div>
     </body>
 </html>
