@@ -644,13 +644,25 @@ const scrollToSection = (id) => {
     }
 };
 
+import { supabase } from '../composables/useSupabase.js';
+
 const fetchProjectsAndHydrate = async () => {
     isLoading.value = true;
     try {
-        const res = await fetch('/api/projects');
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data)) {
-            apiProjects.value = json.data;
+        // Query Supabase Cloud first
+        const { data: supaData, error } = await supabase
+            .from('projects')
+            .select('*');
+
+        if (!error && Array.isArray(supaData) && supaData.length > 0) {
+            apiProjects.value = supaData;
+        } else {
+            // Fallback to local API
+            const res = await fetch('/api/projects');
+            const json = await res.json();
+            if (json.success && Array.isArray(json.data)) {
+                apiProjects.value = json.data;
+            }
         }
     } catch (err) {
         console.error('Failed to fetch API projects:', err);

@@ -640,8 +640,30 @@ const setHoveredProject = (proj) => {
     }
 };
 
+import { supabase } from '../composables/useSupabase.js';
+
 const fetchProjects = async () => {
     try {
+        // Query Supabase Cloud first
+        const { data: supaData, error } = await supabase
+            .from('projects')
+            .select('*')
+            .order('id', { ascending: false });
+
+        if (!error && Array.isArray(supaData) && supaData.length > 0) {
+            projects.value = supaData.map(p => {
+                const slug = slugify(p.title);
+                if (!p.image) {
+                    if (slug === 'void-walker') p.image = '/images/projects/voidwalker-hero.jpg';
+                    else if (slug === 'aquaverse') p.image = '/images/projects/aquaverse-hero.jpg';
+                    else if (slug === 'nopal-dev') p.image = '/images/projects/aquaverse-hero.jpg';
+                }
+                return p;
+            });
+            return;
+        }
+
+        // Fallback to local API
         const res = await fetch("/api/projects");
         const json = await res.json();
         if (json.success && Array.isArray(json.data)) {
@@ -654,24 +676,7 @@ const fetchProjects = async () => {
                 }
                 return p;
             });
-
-            const hasAquaverse = apiData.some(p => slugify(p.title) === 'aquaverse');
-            if (!hasAquaverse) {
-                projects.value = [
-                    {
-                        id: 99,
-                        title: 'AQUAVERSE',
-                        category: 'VR Development',
-                        year: '2026',
-                        desc: 'VR Educational Media for Aquaculture & Deep-Sea Ecosystems built with Unity and OpenXR.',
-                        image: '/images/projects/aquaverse-hero.jpg',
-                        tags: ['Unity 3D', 'C#', 'OpenXR', 'Meta Quest 2']
-                    },
-                    ...apiData
-                ];
-            } else {
-                projects.value = apiData;
-            }
+            projects.value = apiData;
         }
     } catch (err) {
         console.error("Failed to fetch projects:", err);

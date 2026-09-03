@@ -726,11 +726,47 @@ const checkAuth = () => {
     }
 };
 
+import { supabase } from '../composables/useSupabase.js';
+
 const loadProjectData = async () => {
     if (!isEditMode.value) return;
 
     isLoadingData.value = true;
     try {
+        // Try loading from Supabase Cloud first
+        const { data: proj, error } = await supabase
+            .from('projects')
+            .select('*')
+            .eq('id', route.params.id)
+            .single();
+
+        if (!error && proj) {
+            form.value = {
+                title: proj.title || '',
+                slug: proj.slug || '',
+                category: proj.category || 'Website',
+                year: proj.year || new Date().getFullYear().toString(),
+                desc: proj.desc || '',
+                role: proj.role || '',
+                image: proj.image || '',
+                overview: proj.overview || '',
+                problem: proj.problem || '',
+                solution: proj.solution || '',
+                contribution: proj.contribution || '',
+                features: Array.isArray(proj.features) ? JSON.parse(JSON.stringify(proj.features)) : [],
+                result_headline: proj.result_headline || '',
+                result_summary: proj.result_summary || '',
+                result_metrics: Array.isArray(proj.result_metrics) ? JSON.parse(JSON.stringify(proj.result_metrics)) : [],
+                gallery: Array.isArray(proj.gallery) ? JSON.parse(JSON.stringify(proj.gallery)) : [],
+                github_url: proj.github_url || '',
+                live_url: proj.live_url || '',
+                documentation_url: proj.documentation_url || '',
+            };
+            tagsInput.value = Array.isArray(proj.tags) ? proj.tags.join(', ') : '';
+            return;
+        }
+
+        // Fallback to local Laravel API
         const res = await fetch(`/api/projects/${route.params.id}`);
         const json = await res.json();
         if (json.success && json.data) {
@@ -799,7 +835,7 @@ const saveProject = async () => {
 
     const payload = {
         title: form.value.title,
-        slug: form.value.slug || undefined,
+        slug: form.value.slug || form.value.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
         category: form.value.category,
         year: form.value.year,
         desc: form.value.desc,
@@ -818,9 +854,42 @@ const saveProject = async () => {
         features: form.value.features,
         result_metrics: form.value.result_metrics,
         gallery: form.value.gallery,
+        updated_at: new Date().toISOString()
     };
 
     try {
+        // Save to Supabase Cloud directly
+        let saveError = null;
+        if (isEditMode.value) {
+            const { error } = await supabase
+                .from('projects')
+                .update(payload)
+                .eq('id', route.params.id);
+            saveError = error;
+        } else {
+            const { error } = await supabase
+                .from('projects')
+                .insert([payload]);
+            saveError = error;
+        }
+
+        if (!saveError) {
+            if (toastRef.value) {
+                toastRef.value.addToast({
+                    title: isEditMode.value ? 'CASE STUDY UPDATED' : 'CASE STUDY CREATED',
+                    message: 'Record successfully saved and committed to Supabase Cloud.',
+                    type: 'success',
+                    code: '200_OK',
+                    category: 'DATABASE // STORE'
+                });
+            }
+            setTimeout(() => {
+                router.push('/adminnopal');
+            }, 900);
+            return;
+        }
+
+        // Fallback to local API
         const url = isEditMode.value ? `/api/projects/${route.params.id}` : '/api/projects';
         const method = isEditMode.value ? 'PUT' : 'POST';
 
@@ -852,7 +921,7 @@ const saveProject = async () => {
             if (toastRef.value) {
                 toastRef.value.addToast({
                     title: 'SUBMISSION REJECTED',
-                    message: json.message || 'Server rejected the case study data.',
+                    message: json.message || 'Database rejected the case study data.',
                     type: 'error',
                     code: 'ERR_422',
                     category: 'TRANSACTION // FAULT'
