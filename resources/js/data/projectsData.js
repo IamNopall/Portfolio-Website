@@ -477,34 +477,39 @@ export function getAdjacentProjects(currentSlug, allProjects = []) {
     const list = [];
     const seenSlugs = new Set();
 
-    // Add all from database API projects first
-    for (const p of allProjects) {
-        const slug = p.slug || slugify(p.title);
-        if (!seenSlugs.has(slug)) {
-            seenSlugs.add(slug);
-            list.push({
-                slug,
-                title: p.title,
-                category: p.category,
-                year: p.year
-            });
+    // 1. Jika ada data project dari Supabase / API, prioritaskan data tersebut
+    if (Array.isArray(allProjects) && allProjects.length > 0) {
+        for (const p of allProjects) {
+            const slug = p.slug || slugify(p.title);
+            if (slug && !seenSlugs.has(slug)) {
+                seenSlugs.add(slug);
+                list.push({
+                    slug,
+                    title: p.title,
+                    category: p.category,
+                    year: p.year
+                });
+            }
+        }
+    } else {
+        // 2. Hanya gunakan data curated (dummy/mock) jika data API benar-benar kosong
+        for (const [key, item] of Object.entries(curatedCaseStudies)) {
+            if (!seenSlugs.has(key)) {
+                seenSlugs.add(key);
+                list.push({
+                    slug: key,
+                    title: item.title,
+                    category: item.category,
+                    year: item.year
+                });
+            }
         }
     }
 
-    // Add curated items if not in database
-    for (const [key, item] of Object.entries(curatedCaseStudies)) {
-        if (!seenSlugs.has(key)) {
-            seenSlugs.add(key);
-            list.push({
-                slug: key,
-                title: item.title,
-                category: item.category,
-                year: item.year
-            });
-        }
+    // Jika hanya ada 1 atau 0 project, tidak ada project Previous / Next
+    if (list.length <= 1) {
+        return { prev: null, next: null };
     }
-
-    if (list.length === 0) return { prev: null, next: null };
 
     const currentIndex = list.findIndex(p => p.slug === currentSlug);
     if (currentIndex === -1) {
