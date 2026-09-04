@@ -18,7 +18,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
         <!--
         THESIS: Replaces the hollow cutout standee slot with an architectural monograph dossier—pairing real mountain summit portraiture with technical telemetry, live availability signals, and kinetic parallax hierarchy, refusing generic cookie-cutter portfolio cards.
         OWN-WORLD: Obsidian backdrop (#09090b), zinc-800 architectural hairlines, pure white display typography, cobalt focal accents (#2563eb), and tactile glass telemetry cards with subtle border glow.

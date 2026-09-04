@@ -2,19 +2,29 @@
     <header class="fixed top-0 left-0 right-0 z-50 pointer-events-none inverted-chrome">
         <div
             class="px-4 sm:px-8 pt-4 sm:pt-6 pb-4 relative flex items-center justify-between w-full text-[11px] tracking-[0.2em] font-sans chrome-font uppercase">
-            <!-- Left Edge: Portfolio (Desktop) -->
-            <div>
+            <!-- Left Edge: Portfolio & Theme Toggle (Desktop) -->
+            <div class="flex items-center gap-4 sm:gap-6 pointer-events-auto">
                 <a href="#top"
-                    class="hidden sm:inline-flex items-center py-2 px-3 -ml-3 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity"
+                    class="hidden sm:inline-flex items-center py-2 px-3 -ml-3 cursor-pointer hover:opacity-75 transition-opacity"
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
+                <button
+                    type="button"
+                    class="hidden sm:inline-flex items-center gap-2 py-1 px-2.5 rounded-full border border-[var(--border-subtle)] text-[10px] font-mono tracking-widest text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)] transition-all cursor-pointer select-none"
+                    :aria-pressed="isLightMode"
+                    @click="toggleTheme"
+                    title="Toggle Light / Dark Mode"
+                >
+                    <span class="w-1.5 h-1.5 rounded-full" :class="isLightMode ? 'bg-amber-500' : 'bg-blue-500'"></span>
+                    <span>{{ isLightMode ? 'LIGHT' : 'DARK' }}</span>
+                </button>
             </div>
 
             <!-- Mobile Top Center Header Text: Portfolio -->
-            <div class="sm:hidden absolute left-1/2 -translate-x-1/2 top-4">
+            <div class="sm:hidden absolute left-1/2 -translate-x-1/2 top-4 flex items-center gap-3">
                 <a href="#top"
-                    class="inline-flex items-center py-2 px-3 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity"
+                    class="inline-flex items-center py-2 px-2 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity"
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
@@ -79,6 +89,13 @@
                         @click.prevent="scrollToSection('#contact')">
                         Contact
                     </a>
+                    <button
+                        type="button"
+                        class="menu-link-item flex items-center gap-3 text-[5vw] md:text-[2vw] font-black uppercase tracking-tight display-font text-[var(--muted)] hover:text-[var(--heading)] transition-colors cursor-pointer pointer-events-auto select-none pt-4 border-t border-[var(--border-subtle)]"
+                        @click="toggleTheme">
+                        <span class="w-3 h-3 rounded-full" :class="isLightMode ? 'bg-amber-500' : 'bg-blue-500'"></span>
+                        <span>{{ isLightMode ? 'SWITCH TO DARK MODE' : 'SWITCH TO LIGHT MODE' }}</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -89,10 +106,12 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGsap } from '../composables/useGsap';
+import { useTheme } from '../composables/useTheme';
 
 const router = useRouter();
 const route = useRoute();
 const { gsap, prefersReducedMotion } = useGsap();
+const { isLightMode, toggleTheme, initTheme } = useTheme();
 
 const menuOpen = ref(false);
 const isMenuHover = ref(false);
@@ -230,8 +249,7 @@ const scrollToSection = (selector) => {
 };
 
 onMounted(() => {
-    document.documentElement.classList.remove('light-mode');
-    localStorage.setItem('theme', 'dark');
+    initTheme();
 });
 
 watch(menuOpen, (isOpen) => {
@@ -240,7 +258,6 @@ watch(menuOpen, (isOpen) => {
 
 onBeforeUnmount(() => {
     document.body.style.overflow = '';
-    document.documentElement.classList.remove('light-mode');
     if (menuTl) menuTl.kill();
 });
 </script>

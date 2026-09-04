@@ -47,6 +47,17 @@
 
                 <!-- Action Links or Contact -->
                 <div class="flex items-center gap-3 sm:gap-5">
+                    <button
+                        type="button"
+                        class="hidden sm:inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full border border-[var(--border-subtle)] text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)] transition-all cursor-pointer font-mono text-[9px] tracking-widest select-none"
+                        :aria-pressed="isLightMode"
+                        @click="toggleTheme"
+                        title="Toggle Light / Dark Mode"
+                    >
+                        <span class="w-1.5 h-1.5 rounded-full" :class="isLightMode ? 'bg-amber-500' : 'bg-blue-500'"></span>
+                        <span>{{ isLightMode ? 'LIGHT' : 'DARK' }}</span>
+                    </button>
+
                     <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer"
                         class="hidden sm:inline-flex items-center gap-1.5 text-black bg-white px-3.5 py-1.5 rounded-full font-bold text-[10px] hover:opacity-90 transition-opacity">
                         <span class="text-black">LIVE DEMO</span>
@@ -593,6 +604,7 @@ import FooterBar from '../components/FooterBar.vue';
 import NotFoundView from './NotFoundView.vue';
 import { getAdjacentProjects, resolveProjectData } from '../data/projectsData.js';
 import { useGsap } from '../composables/useGsap';
+import { useTheme } from '../composables/useTheme';
 
 const props = defineProps({
     slug: {
@@ -604,6 +616,7 @@ const props = defineProps({
 const route = useRoute();
 const currentSlug = computed(() => props.slug || route.params.slug);
 const { gsap, ScrollTrigger, prefersReducedMotion } = useGsap();
+const { isLightMode, toggleTheme, initTheme } = useTheme();
 
 const isLoading = ref(true);
 const apiProjects = ref([]);
@@ -793,6 +806,7 @@ watch(
 );
 
 onMounted(() => {
+    initTheme();
     fetchProjectsAndHydrate();
     window.addEventListener('scroll', updateScrollMetrics, { passive: true });
     window.scrollTo({ top: 0 });
