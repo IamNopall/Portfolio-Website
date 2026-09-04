@@ -3,17 +3,21 @@
         <div
             class="px-4 sm:px-8 pt-4 sm:pt-6 pb-4 relative flex items-center justify-between w-full text-[11px] tracking-[0.2em] font-sans chrome-font uppercase">
             <!-- Left Edge: Portfolio & Theme Toggle (Desktop) -->
-            <div class="flex items-center gap-4 sm:gap-6 pointer-events-auto">
+            <div class="flex items-center gap-6 sm:gap-8 pointer-events-auto">
                 <a href="#top"
                     class="hidden sm:inline-flex items-center py-2 px-3 -ml-3 cursor-pointer hover:opacity-75 transition-opacity"
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
-                <button type="button"
-                    class="hidden sm:inline-flex items-center gap-2 py-1 px-2.5 rounded-full border border-[var(--border-subtle)] text-[10px] font-mono tracking-widest text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)] transition-all cursor-pointer select-none"
-                    :aria-pressed="isLightMode" @click="toggleTheme" title="Toggle Light / Dark Mode">
-                    <span class="w-1.5 h-1.5 rounded-full" :class="isLightMode ? 'bg-amber-500' : 'bg-blue-500'"></span>
-                    <span>{{ isLightMode ? 'LIGHT' : 'DARK' }}</span>
+                <button
+                    type="button"
+                    class="hidden sm:inline-flex items-center py-2 px-3 cursor-pointer hover:opacity-75 transition-opacity select-none"
+                    :aria-pressed="isLightMode"
+                    @click="toggleTheme"
+                >
+                    <Transition name="menu-label" mode="out-in">
+                        <span :key="themeLabel" class="menu-label">{{ themeLabel }}</span>
+                    </Transition>
                 </button>
             </div>
 
@@ -106,6 +110,7 @@ const menuOpen = ref(false);
 const isMenuHover = ref(false);
 const menuOverlayRef = ref(null);
 const menuLabel = computed(() => (menuOpen.value ? 'CLOSE' : (isMenuHover.value ? 'OPEN' : 'MENU')));
+const themeLabel = computed(() => (isLightMode.value ? 'DARK MODE' : 'LIGHT MODE'));
 
 let menuTl = null;
 
