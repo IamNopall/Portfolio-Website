@@ -1,8 +1,21 @@
 <template>
     <footer class="fixed bottom-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
-            class="px-4 sm:px-8 pb-4 pt-3 sm:pb-6 sm:pt-4 flex justify-between w-full text-[9px] sm:text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
-            <span></span>
+            class="px-4 sm:px-8 pb-4 pt-3 sm:pb-6 sm:pt-4 flex justify-between items-center w-full text-[9px] sm:text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
+            <!-- Left Corner: Light / Dark Mode Toggle Button -->
+            <button
+                type="button"
+                class="pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity select-none flex items-center py-1 -ml-1 sm:ml-0"
+                :aria-pressed="isLightMode"
+                @click="toggleTheme"
+                title="Toggle Light / Dark Mode"
+            >
+                <Transition name="menu-label" mode="out-in">
+                    <span :key="themeLabel" class="menu-label">{{ themeLabel }}</span>
+                </Transition>
+            </button>
+
+            <!-- Right Corner: Live Location & Time -->
             <span class="pointer-events-auto">
                 {{ displayText }}
             </span>
@@ -11,7 +24,11 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
+import { useTheme } from '../composables/useTheme';
+
+const { isLightMode, toggleTheme, initTheme } = useTheme();
+const themeLabel = computed(() => (isLightMode.value ? 'DARK MODE' : 'LIGHT MODE'));
 
 const displayText = ref('LOCATING...');
 const locationString = ref('LOCATING...');
@@ -20,10 +37,11 @@ let clockInterval;
 // 🔹 fallback timezone (pasti ada)
 const getTimezoneFallback = () => {
     return Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ').split('/').pop();
-    // .split('/').pop() mengubah "Asia/Jakarta" menjadi "Jakarta" agar lebih rapi
 };
 
 onMounted(async () => {
+    initTheme();
+
     // =========================
     // 0. CEK CACHE LOKASI (Agar lebih cepat)
     // =========================
@@ -53,7 +71,6 @@ onMounted(async () => {
                         `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
                         {
                             headers: {
-                                // Nominatim sangat ketat soal User-Agent
                                 'User-Agent': 'VuePortfolioApp/1.0 (contact@yourdomain.com)'
                             }
                         }
@@ -64,7 +81,6 @@ onMounted(async () => {
                     const geoData = await geoRes.json();
                     const addr = geoData.address || {};
 
-                    // 🔹 Ambil dari tingkat paling kecil/spesifik ke besar
                     const specificArea =
                         addr.neighbourhood ||
                         addr.quarter ||
@@ -93,7 +109,6 @@ onMounted(async () => {
                         finalLocation = city;
                     }
                 } catch (geoError) {
-                    // fallback kalau reverse gagal (limit API dll)
                     if (ipData.city && ipData.region) {
                         finalLocation = `${ipData.city}, ${ipData.region}`;
                     } else if (ipData.city) {
@@ -112,7 +127,6 @@ onMounted(async () => {
             const formattedLocation = finalLocation.toUpperCase();
             locationString.value = formattedLocation;
 
-            // Simpan ke localStorage agar visit berikutnya instan
             localStorage.setItem('user_location', formattedLocation);
 
         } catch (err) {
@@ -133,7 +147,7 @@ onMounted(async () => {
         displayText.value = `${locationString.value} ${h}:${m}:${s}`;
     };
 
-    updateClock(); // Eksekusi langsung agar tidak nunggu 1 detik
+    updateClock();
     clockInterval = setInterval(updateClock, 1000);
 });
 
