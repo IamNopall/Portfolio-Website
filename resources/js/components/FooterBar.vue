@@ -2,18 +2,20 @@
     <footer class="fixed bottom-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
             class="px-4 sm:px-8 pb-4 pt-3 sm:pb-6 sm:pt-4 flex justify-between items-center w-full text-[9px] sm:text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
-            <!-- Left Corner: Light / Dark Mode Toggle Button -->
-            <button
-                type="button"
-                class="pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity select-none flex items-center py-1 -ml-1 sm:ml-0"
-                :aria-pressed="isLightMode"
-                @click="toggleTheme"
-                title="Toggle Light / Dark Mode"
-            >
-                <Transition name="menu-label" mode="out-in">
-                    <span :key="themeLabel" class="menu-label">{{ themeLabel }}</span>
-                </Transition>
-            </button>
+            <!-- Left Corner: Light / Dark Mode Toggle Button (Mobile Only) -->
+            <div>
+                <button
+                    type="button"
+                    class="sm:hidden pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity select-none flex items-center py-1 -ml-1"
+                    :aria-pressed="isLightMode"
+                    @click="toggleTheme"
+                    title="Toggle Light / Dark Mode"
+                >
+                    <Transition name="menu-label" mode="out-in">
+                        <span :key="themeLabel" class="menu-label">{{ themeLabel }}</span>
+                    </Transition>
+                </button>
+            </div>
 
             <!-- Right Corner: Live Location & Time -->
             <span class="pointer-events-auto">
