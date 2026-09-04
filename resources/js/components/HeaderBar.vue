@@ -9,13 +9,9 @@
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
-                <button
-                    type="button"
+                <button type="button"
                     class="hidden sm:inline-flex items-center gap-2 py-1 px-2.5 rounded-full border border-[var(--border-subtle)] text-[10px] font-mono tracking-widest text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)] transition-all cursor-pointer select-none"
-                    :aria-pressed="isLightMode"
-                    @click="toggleTheme"
-                    title="Toggle Light / Dark Mode"
-                >
+                    :aria-pressed="isLightMode" @click="toggleTheme" title="Toggle Light / Dark Mode">
                     <span class="w-1.5 h-1.5 rounded-full" :class="isLightMode ? 'bg-amber-500' : 'bg-blue-500'"></span>
                     <span>{{ isLightMode ? 'LIGHT' : 'DARK' }}</span>
                 </button>
@@ -89,13 +85,6 @@
                         @click.prevent="scrollToSection('#contact')">
                         Contact
                     </a>
-                    <button
-                        type="button"
-                        class="menu-link-item flex items-center gap-3 text-[5vw] md:text-[2vw] font-black uppercase tracking-tight display-font text-[var(--muted)] hover:text-[var(--heading)] transition-colors cursor-pointer pointer-events-auto select-none pt-4 border-t border-[var(--border-subtle)]"
-                        @click="toggleTheme">
-                        <span class="w-3 h-3 rounded-full" :class="isLightMode ? 'bg-amber-500' : 'bg-blue-500'"></span>
-                        <span>{{ isLightMode ? 'SWITCH TO DARK MODE' : 'SWITCH TO LIGHT MODE' }}</span>
-                    </button>
                 </div>
             </div>
         </div>
