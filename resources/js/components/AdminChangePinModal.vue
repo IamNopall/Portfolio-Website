@@ -148,6 +148,8 @@ const handleClose = () => {
     isOpen.value = false;
 };
 
+import { supabase } from '../composables/useSupabase.js';
+
 const handleSubmit = async () => {
     errorMessage.value = '';
     successMessage.value = '';
@@ -165,6 +167,25 @@ const handleSubmit = async () => {
     isSubmitting.value = true;
 
     try {
+        // Try Supabase directly
+        const { error } = await supabase
+            .from('admin_access')
+            .upsert({
+                key: 'admin_pin',
+                pin_hash: newPin.value,
+                updated_at: new Date().toISOString()
+            }, { onConflict: 'key' });
+
+        if (!error) {
+            successMessage.value = 'PIN successfully updated in Supabase cloud.';
+            emit('success');
+            setTimeout(() => {
+                isOpen.value = false;
+            }, 1200);
+            return;
+        }
+
+        // Fallback to local API
         const res = await fetch('/api/admin/change-pin', {
             method: 'POST',
             headers: {
@@ -180,7 +201,7 @@ const handleSubmit = async () => {
         const json = await res.json();
 
         if (res.ok && json.success) {
-            successMessage.value = 'PIN successfully hashed & updated in database.';
+            successMessage.value = 'PIN successfully updated in database.';
             emit('success');
             setTimeout(() => {
                 isOpen.value = false;
