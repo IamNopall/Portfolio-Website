@@ -32,12 +32,13 @@
                             }}</span>
                         </Transition>
                     </span>
+                    <span class="sr-only"> — Naufal Tsaqif | Informatics Engineer &amp; Creative Developer Portfolio</span>
                 </h1>
             </div>
 
             <!-- Structural Metadata Overlay (Editorial Touch) -->
             <div ref="heroMetaRef"
-                class="absolute bottom-16 sm:bottom-12 left-4 sm:left-8 right-4 sm:right-8 flex justify-between items-end text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-sans text-[var(--muted)] pointer-events-none z-10">
+                class="absolute bottom-16 sm:bottom-12 left-4 sm:left-8 right-4 sm:right-8 flex justify-between items-end text-xs tracking-[0.2em] uppercase font-mono text-[var(--muted)] pointer-events-none z-10">
                 <div class="hero-meta-left">
                     <span class="block text-[var(--text)] font-semibold mb-0.5 sm:mb-1">NAUFAL TSAQIF</span>
                 </div>
@@ -63,21 +64,6 @@
             </div>
 
             <div class="max-w-7xl mx-auto relative z-10">
-                <!-- Telemetry & Status Anchor Bar (Clean functional metadata, no artificial kickers) -->
-                <div
-                    class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 sm:mb-16 border-b border-[var(--border-subtle)] font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-[var(--muted)] uppercase">
-                    <div class="flex items-center gap-3">
-                        <span class="inline-flex items-center gap-2 text-emerald-400 font-medium">
-                            <span class="relative flex h-2 w-2">
-                                <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                            </span>
-                            AVAILABLE FOR SELECT ROLES &amp; CLIENT PROJECTS
-                        </span>
-                    </div>
-                </div>
-
                 <!-- Main Editorial Spread: Asymmetrical 2-Column Architectural Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -109,21 +95,21 @@
                             class="pt-8 border-t border-[var(--border-subtle)] grid grid-cols-1 sm:grid-cols-2 gap-4 font-sans text-xs tracking-wider uppercase mb-8">
                             <div
                                 class="space-y-1.5 p-4 rounded-xl bg-white/[0.02] border border-[var(--border-subtle)]">
-                                <span class="block text-[10px] tracking-[0.2em] text-[var(--muted)] font-mono">CORE
+                                <span class="block text-xs tracking-[0.2em] text-[var(--muted)] font-mono">CORE
                                     DISCIPLINE</span>
                                 <span class="block text-[var(--heading)] font-semibold text-sm">INFORMATICS
                                     ENGINEERING</span>
                                 <span
-                                    class="block text-[11px] text-[var(--text-soft)] normal-case tracking-normal">Distributed
+                                    class="block text-xs text-[var(--text-soft)] normal-case tracking-normal">Distributed
                                     logic, relational schema &amp; spatial computing</span>
                             </div>
                             <div
                                 class="space-y-1.5 p-4 rounded-xl bg-white/[0.02] border border-[var(--border-subtle)]">
-                                <span class="block text-[10px] tracking-[0.2em] text-[var(--muted)] font-mono">PRIMARY
+                                <span class="block text-xs tracking-[0.2em] text-[var(--muted)] font-mono">PRIMARY
                                     ENGINES</span>
                                 <span class="block text-[var(--heading)] font-semibold text-sm">UNITY 3D &amp; MODERN
                                     WEB</span>
-                                <span class="block text-[11px] text-[var(--text-soft)] normal-case tracking-normal">C#,
+                                <span class="block text-xs text-[var(--text-soft)] normal-case tracking-normal">C#,
                                     OpenXR, Vue 3, Tailwind CSS &amp; Laravel</span>
                             </div>
                         </div>
@@ -131,12 +117,12 @@
                         <!-- Direct Navigation Actions -->
                         <div class="flex flex-wrap items-center gap-4">
                             <a href="#projects"
-                                class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white text-black font-bold text-xs tracking-wider uppercase hover:opacity-90 transition-all hover:gap-4 group shadow-md">
+                                class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white text-black font-bold text-xs tracking-wider uppercase hover:opacity-90 transition-all hover:gap-4 group shadow-md focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                                 <span class="text-black">EXPLORE CASE STUDIES</span>
                                 <span class="text-black transition-transform group-hover:translate-y-0.5">↓</span>
                             </a>
                             <a href="https://github.com/IamNopall" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[var(--border-subtle)] text-[var(--heading)] text-xs font-semibold tracking-wider uppercase hover:border-[var(--heading)] hover:bg-white/[0.03] transition-all">
+                                class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[var(--border-subtle)] text-[var(--heading)] text-xs font-semibold tracking-wider uppercase hover:border-[var(--heading)] hover:bg-white/[0.03] transition-all focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                                 <span>GITHUB ARCHIVE</span>
                                 <span class="text-xs">↗</span>
                             </a>
@@ -170,7 +156,7 @@
                             </h3>
                         </div>
                         <span
-                            class="hidden sm:inline-block font-sans text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]">
+                            class="hidden sm:inline-block font-mono text-xs tracking-[0.2em] uppercase text-[var(--muted)]">
                             SYSTEMS &amp; STACK
                         </span>
                     </div>
@@ -180,7 +166,7 @@
                             class="tech-group-row grid grid-cols-1 md:grid-cols-[0.25fr_0.75fr] gap-6 py-8 sm:py-10 border-b border-[var(--border-subtle)] items-start">
 
                             <div
-                                class="flex items-center gap-3 font-sans text-[10px] tracking-[0.22em] text-[var(--muted)] uppercase">
+                                class="flex items-center gap-3 font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase">
                                 <span class="text-[var(--text)] font-mono font-semibold">0{{ idx + 1 }}</span>
                                 <span class="w-4 h-[1px] bg-[var(--border-subtle)]"></span>
                                 <span>{{ group.title }}</span>
@@ -212,8 +198,8 @@
             <div class="w-full max-w-[1560px] mx-auto">
                 <!-- Section Header / Meta -->
                 <div
-                    class="projects-header-meta flex justify-between items-baseline mb-10 sm:mb-14 font-sans text-[10px] sm:text-[11px] tracking-[0.25em] text-[var(--muted)] uppercase">
-                    <p>03 / SELECTED WORKS</p>
+                    class="projects-header-meta flex justify-between items-baseline mb-10 sm:mb-14 font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase">
+                    <p>SELECTED WORKS // ARCHIVE</p>
                     <p class="tracking-widest tabular-nums">{{ filteredProjects.length }} OF {{ projects.length }} WORKS
                     </p>
                 </div>
@@ -237,9 +223,9 @@
                         <!-- Minimalist Search Input -->
                         <div class="relative min-w-[200px] sm:min-w-[260px]">
                             <input v-model="projectSearch" type="text" placeholder="SEARCH WORK..."
-                                class="w-full bg-transparent border-b border-[var(--border-subtle)] focus:border-[var(--heading)] px-1 py-2 text-xs font-sans text-[var(--heading)] placeholder:text-[var(--muted)]/50 focus:outline-none transition-colors uppercase tracking-[0.18em]" />
+                                class="w-full bg-transparent border-b border-[var(--border-subtle)] focus:border-[var(--heading)] px-1 py-2 text-xs font-sans text-[var(--heading)] placeholder:text-[var(--muted)]/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 transition-colors uppercase tracking-[0.18em]" />
                             <button v-if="projectSearch" @click="projectSearch = ''"
-                                class="absolute inset-y-0 right-0 pr-1 flex items-center text-xs text-[var(--muted)] hover:text-[var(--heading)] transition-colors">
+                                class="absolute inset-y-0 right-0 pr-1 flex items-center text-xs text-[var(--muted)] hover:text-[var(--heading)] transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                                 ✕
                             </button>
                         </div>
@@ -250,13 +236,13 @@
                 <div
                     class="projects-category-bar flex items-center gap-6 sm:gap-8 overflow-x-auto pb-4 mb-12 sm:mb-16 scrollbar-none border-b border-[var(--border-subtle)]/50">
                     <button v-for="cat in projectCategories" :key="cat"
-                        class="font-sans text-[11px] tracking-[0.2em] uppercase py-2 transition-all relative whitespace-nowrap cursor-pointer"
+                        class="font-mono text-xs tracking-[0.2em] uppercase py-2 transition-all relative whitespace-nowrap cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                         :class="activeCategory === cat
                             ? 'text-[var(--heading)] font-bold'
                             : 'text-[var(--muted)] hover:text-[var(--heading)]'
                             " @click="selectCategory(cat)">
                         <span>{{ cat }}</span>
-                        <span class="ml-1 text-[9px] tabular-nums opacity-60">
+                        <span class="ml-1 text-xs tabular-nums opacity-60">
                             ({{
                                 cat === 'All'
                                     ? projects.length
@@ -277,7 +263,7 @@
                         No projects match your current filter or search criteria.
                     </p>
                     <button @click="resetFilters"
-                        class="font-sans text-[10px] tracking-[0.2em] uppercase px-6 py-2.5 border border-[var(--heading)] text-[var(--heading)] font-bold hover:bg-[var(--heading)] hover:text-[var(--bg)] transition-colors cursor-pointer">
+                        class="font-mono text-xs tracking-[0.2em] uppercase px-6 py-2.5 border border-[var(--heading)] text-[var(--heading)] font-bold hover:bg-[var(--heading)] hover:text-[var(--bg)] transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                         RESET FILTER
                     </button>
                 </div>
@@ -302,7 +288,7 @@
                                     </div>
                                     <!-- Bottom Badge Info -->
                                     <div
-                                        class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[9px] tracking-[0.2em] font-sans uppercase text-white/90 z-20 pointer-events-none">
+                                        class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs tracking-[0.2em] font-mono uppercase text-white/90 z-20 pointer-events-none">
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +298,11 @@
                         <div class="divide-y divide-[var(--border-subtle)] border-b border-[var(--border-subtle)]">
                             <div v-for="(project, i) in filteredProjects" :key="project.id ?? project.title"
                                 @mouseenter="setHoveredProject(project)" @click="openProjectDetail(project)"
-                                class="project-row group grid grid-cols-[1fr_460px_1fr] xl:grid-cols-[1fr_560px_1fr] 2xl:grid-cols-[1fr_620px_1fr] items-center py-7 xl:py-9 px-2 sm:px-4 cursor-pointer transition-all duration-300 relative z-20"
+                                class="project-row group grid grid-cols-[1fr_460px_1fr] xl:grid-cols-[1fr_560px_1fr] 2xl:grid-cols-[1fr_620px_1fr] items-center py-7 xl:py-9 px-2 sm:px-4 cursor-pointer transition-all duration-300 relative z-20 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                                tabindex="0"
+                                role="button"
+                                :aria-label="'View case study for ' + project.title"
+                                @keydown.enter="openProjectDetail(project)"
                                 :class="activeProject?.title === project.title ? 'is-active-project opacity-100' : 'is-inactive-project opacity-35 hover:opacity-85'">
 
                                 <!-- Left Column: [Year] -->
@@ -327,7 +317,7 @@
                                 <!-- Right Column: [Category] + Title -->
                                 <div class="text-right flex flex-col items-end">
                                     <span
-                                        class="font-mono text-[9px] xl:text-[10.5px] tracking-[0.22em] uppercase transition-colors duration-300 mb-1"
+                                        class="font-mono text-xs tracking-[0.2em] uppercase transition-colors duration-300 mb-1"
                                         :class="activeProject?.title === project.title ? 'text-[var(--text-soft)] font-medium' : 'text-[var(--muted)]/50 group-hover:text-[var(--text-soft)]'">
                                         [{{ (project.category || 'CASE STUDY').toUpperCase() }}]
                                     </span>
@@ -345,13 +335,17 @@
                         class="lg:hidden divide-y divide-[var(--border-subtle)] border-b border-[var(--border-subtle)]">
                         <div v-for="(project, i) in filteredProjects" :key="'mob-' + (project.id ?? project.title)"
                             @click="openProjectDetail(project)"
-                            class="project-row py-8 px-2 flex flex-col gap-4 cursor-pointer group">
+                            class="project-row py-8 px-2 flex flex-col gap-4 cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                            tabindex="0"
+                            role="button"
+                            :aria-label="'View case study for ' + project.title"
+                            @keydown.enter="openProjectDetail(project)">
 
                             <div class="flex items-center justify-between">
                                 <span class="font-mono text-xs tracking-[0.2em] text-[var(--muted)]">
                                     [{{ project.year || '2026' }}]
                                 </span>
-                                <span class="font-mono text-[9px] tracking-[0.2em] text-[var(--muted)] uppercase">
+                                <span class="font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase">
                                     [{{ (project.category || 'CASE STUDY').toUpperCase() }}]
                                 </span>
                             </div>
@@ -384,21 +378,21 @@
         <section ref="contactSectionRef"
             class="w-full bg-[var(--bg)] text-[var(--text)] px-4 sm:px-8 py-24 sm:py-40 border-t border-[var(--border-subtle)] flex flex-col items-center justify-center text-center overflow-hidden"
             id="contact">
-            <p class="contact-eyebrow font-sans text-[10px] tracking-[0.22em] text-[var(--muted)] uppercase mb-8">
-                04 / GET IN TOUCH
+            <p class="contact-eyebrow font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase mb-8">
+                DIRECT INQUIRY // CHANNELS
             </p>
             <a href="mailto:naufaltsq333@gmail.com"
-                class="contact-title text-[14vw] md:text-[11vw] font-black uppercase tracking-tighter leading-none hover:text-[var(--accent-blue)] transition-colors display-font inline-block">
+                class="contact-title text-[14vw] md:text-[11vw] font-black uppercase tracking-tighter leading-none hover:text-[var(--accent-blue)] transition-colors display-font inline-block focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                 LET'S TALK
             </a>
-            <p class="contact-email mt-8 font-sans text-xs tracking-[0.2em] text-[var(--muted)] uppercase">
+            <p class="contact-email mt-8 font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase">
                 naufaltsq333@gmail.com
             </p>
 
             <!-- Social Links: GitHub & LinkedIn -->
             <div class="contact-socials mt-8 flex items-center justify-center gap-4">
                 <a href="https://github.com/IamNopall" target="_blank" rel="noopener noreferrer"
-                    class="p-2.5 border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--muted)] hover:text-[var(--heading)] rounded-full transition-all hover:scale-110 inline-flex items-center justify-center"
+                    class="p-2.5 border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--muted)] hover:text-[var(--heading)] rounded-full transition-all hover:scale-110 inline-flex items-center justify-center focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                     title="GitHub" aria-label="GitHub Profile">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path
@@ -407,7 +401,7 @@
                 </a>
                 <a href="https://www.linkedin.com/in/naufal-tsaqif-athala-irchamto" target="_blank"
                     rel="noopener noreferrer"
-                    class="p-2.5 border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--muted)] hover:text-[var(--heading)] rounded-full transition-all hover:scale-110 inline-flex items-center justify-center"
+                    class="p-2.5 border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--muted)] hover:text-[var(--heading)] rounded-full transition-all hover:scale-110 inline-flex items-center justify-center focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                     title="LinkedIn" aria-label="LinkedIn Profile">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path

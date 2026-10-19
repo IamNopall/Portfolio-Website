@@ -29,10 +29,10 @@
         <header
             class="fixed top-0 left-0 right-0 z-40 bg-[var(--bg)]/85 backdrop-blur-md border-b border-[var(--border-subtle)] transition-all duration-300">
             <div
-                class="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between font-mono text-[10px] sm:text-[11px] tracking-[0.2em] uppercase">
+                class="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between font-mono text-xs tracking-[0.2em] uppercase">
                 <!-- Back Link -->
                 <router-link to="/#projects"
-                    class="group flex items-center gap-2.5 text-[var(--muted)] hover:text-[var(--heading)] transition-colors cursor-pointer font-medium">
+                    class="group flex items-center gap-2.5 text-[var(--muted)] hover:text-[var(--heading)] transition-colors cursor-pointer font-medium focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm">
                     <span class="inline-block transform group-hover:-translate-x-1 transition-transform">←</span>
                     <span>ALL WORKS</span>
                 </router-link>
@@ -42,14 +42,14 @@
                     <span class="text-[var(--text-soft)] font-mono font-semibold">0{{ project.id ?? '1' }}</span>
                     <span class="w-3 h-[1px] bg-[var(--border-subtle)]"></span>
                     <span class="text-[var(--heading)] font-semibold truncate max-w-[240px]">{{ project.title }}</span>
-                    <span class="text-[9px] opacity-60">/ {{ project.category }}</span>
+                    <span class="text-xs opacity-60">/ {{ project.category }}</span>
                 </div>
 
                 <!-- Action Links or Contact -->
                 <div class="flex items-center gap-3 sm:gap-5">
                     <button
                         type="button"
-                        class="hidden sm:inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full border border-[var(--border-subtle)] text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)] transition-all cursor-pointer font-mono text-[9px] tracking-widest select-none"
+                        class="hidden sm:inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full border border-[var(--border-subtle)] text-[var(--muted)] hover:text-[var(--heading)] hover:border-[var(--heading)] transition-all cursor-pointer font-mono text-xs tracking-widest select-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                         :aria-pressed="isLightMode"
                         @click="toggleTheme"
                         title="Toggle Light / Dark Mode"
@@ -59,7 +59,7 @@
                     </button>
 
                     <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer"
-                        class="hidden sm:inline-flex items-center gap-1.5 text-black bg-white px-3.5 py-1.5 rounded-full font-bold text-[10px] hover:opacity-90 transition-opacity">
+                        class="hidden sm:inline-flex items-center gap-1.5 text-black bg-white px-3.5 py-1.5 rounded-full font-bold text-xs hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                         <span class="text-black">LIVE DEMO</span>
                         <span class="text-xs text-black">↗</span>
                     </a>
@@ -67,7 +67,7 @@
                     <!-- Social Icons: GitHub & LinkedIn -->
                     <div class="flex items-center gap-2.5 text-[var(--muted)]">
                         <a href="https://github.com/IamNopall" target="_blank" rel="noopener noreferrer"
-                            class="p-1 hover:text-[var(--heading)] transition-colors inline-flex items-center"
+                            class="p-1 hover:text-[var(--heading)] transition-colors inline-flex items-center focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                             title="GitHub" aria-label="GitHub Profile">
                             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24">
                                 <path
@@ -76,7 +76,7 @@
                         </a>
                         <a href="https://www.linkedin.com/in/naufal-tsaqif-athala-irchamto" target="_blank"
                             rel="noopener noreferrer"
-                            class="p-1 hover:text-[var(--heading)] transition-colors inline-flex items-center"
+                            class="p-1 hover:text-[var(--heading)] transition-colors inline-flex items-center focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                             title="LinkedIn" aria-label="LinkedIn Profile">
                             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24">
                                 <path
@@ -107,7 +107,7 @@
             <section class="cs-hero max-w-7xl mx-auto px-4 sm:px-8 pb-16 sm:pb-24">
                 <!-- Metadata Eyebrow Header -->
                 <div
-                    class="cs-hero-meta flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 sm:mb-12 border-b border-[var(--border-subtle)] font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-[var(--muted)] uppercase">
+                    class="cs-hero-meta flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 sm:mb-12 border-b border-[var(--border-subtle)] font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase">
                     <div class="flex items-center gap-3">
                         <span class="text-[var(--heading)] font-semibold">PROJECT ARCHIVE // {{ project.year || '2026'
                             }}</span>
@@ -123,7 +123,7 @@
                 <!-- Giant Display Project Title & Tagline -->
                 <div class="mb-10 sm:mb-16">
                     <h1
-                        class="cs-hero-title display-font font-black uppercase text-[14vw] sm:text-[10vw] lg:text-[7.5rem] xl:text-[8.5rem] leading-[0.84] tracking-tighter text-[var(--heading)] mb-6 select-none">
+                        class="cs-hero-title display-font font-black uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[6.5rem] leading-[0.88] tracking-tighter text-[var(--heading)] mb-6 select-none">
                         {{ project.title }}
                     </h1>
                     <p
@@ -135,13 +135,13 @@
                     <div
                         class="cs-hero-actions flex flex-wrap items-center gap-4 sm:gap-6 pt-8 mt-8 border-t border-[var(--border-subtle)] font-mono text-xs tracking-[0.18em] uppercase">
                         <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white text-black font-bold hover:opacity-90 transition-all active:scale-[0.98] group shadow-lg">
+                            class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white text-black font-bold hover:opacity-90 transition-all active:scale-[0.98] group shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                             <span class="text-black">LAUNCH EXPERIENCE</span>
                             <span class="text-xs group-hover:translate-x-0.5 transition-transform text-black">↗</span>
                         </a>
 
                         <a v-if="project.githubUrl" :href="project.githubUrl" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--heading)] hover:bg-white/[0.04] transition-all font-semibold cursor-pointer">
+                            class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--heading)] hover:bg-white/[0.04] transition-all font-semibold cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                             <svg class="w-4 h-4 fill-current transition-colors" viewBox="0 0 24 24">
                                 <path
                                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
@@ -152,7 +152,7 @@
 
                         <a v-if="project.documentationUrl" :href="project.documentationUrl" target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--heading)] hover:bg-white/[0.04] transition-all font-semibold cursor-pointer">
+                            class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[var(--border-subtle)] hover:border-[var(--heading)] text-[var(--heading)] hover:bg-white/[0.04] transition-all font-semibold cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                             <span>DOCUMENTATION</span>
                             <span class="text-xs group-hover:translate-x-0.5 transition-transform">↗</span>
                         </a>
@@ -185,52 +185,52 @@
                         <div class="p-6 rounded-2xl bg-white/[0.02] border border-[var(--border-subtle)] space-y-5">
                             <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
                                 <span
-                                    class="font-mono text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase font-semibold">
+                                    class="font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase font-semibold">
                                     DOSSIER INDEX
                                 </span>
-                                <span class="font-mono text-[10px] text-blue-400 font-bold tabular-nums">
+                                <span class="font-mono text-xs text-blue-400 font-bold tabular-nums">
                                     {{ scrollProgress }}% READ
                                 </span>
                             </div>
 
-                            <nav class="space-y-1 font-mono text-[11px] tracking-wider uppercase">
+                            <nav class="space-y-1 font-mono text-xs tracking-wider uppercase">
                                 <button @click="scrollToSection('overview')"
-                                    :class="['w-full text-left py-2 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer', activeSection === 'overview' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
+                                    :class="['w-full text-left py-2.5 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none', activeSection === 'overview' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
                                     <span>CONTEXT &amp; PURPOSE</span>
                                     <span v-if="activeSection === 'overview'"
                                         class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                 </button>
 
                                 <button v-if="project.contribution" @click="scrollToSection('contribution')"
-                                    :class="['w-full text-left py-2 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer', activeSection === 'contribution' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
+                                    :class="['w-full text-left py-2.5 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none', activeSection === 'contribution' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
                                     <span>PERSONAL IMPACT</span>
                                     <span v-if="activeSection === 'contribution'"
                                         class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                 </button>
 
                                 <button v-if="project.technologies?.length" @click="scrollToSection('technologies')"
-                                    :class="['w-full text-left py-2 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer', activeSection === 'technologies' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
+                                    :class="['w-full text-left py-2.5 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none', activeSection === 'technologies' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
                                     <span>SYSTEMS &amp; TOOLKIT</span>
                                     <span v-if="activeSection === 'technologies'"
                                         class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                 </button>
 
                                 <button v-if="project.features?.length" @click="scrollToSection('features')"
-                                    :class="['w-full text-left py-2 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer', activeSection === 'features' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
+                                    :class="['w-full text-left py-2.5 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none', activeSection === 'features' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
                                     <span>FEATURE BREAKDOWN</span>
                                     <span v-if="activeSection === 'features'"
                                         class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                 </button>
 
                                 <button v-if="project.result" @click="scrollToSection('results')"
-                                    :class="['w-full text-left py-2 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer', activeSection === 'results' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
+                                    :class="['w-full text-left py-2.5 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none', activeSection === 'results' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
                                     <span>MEASURABLE RESULTS</span>
                                     <span v-if="activeSection === 'results'"
                                         class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                 </button>
 
                                 <button v-if="project.gallery?.length" @click="scrollToSection('gallery')"
-                                    :class="['w-full text-left py-2 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer', activeSection === 'gallery' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
+                                    :class="['w-full text-left py-2.5 px-3 rounded-lg transition-all flex items-center justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none', activeSection === 'gallery' ? 'bg-white/10 text-white font-bold pl-4' : 'text-[var(--muted)] hover:text-[var(--heading)] hover:bg-white/[0.03]']">
                                     <span>PROJECT GALLERY</span>
                                     <span v-if="activeSection === 'gallery'"
                                         class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
@@ -240,7 +240,7 @@
 
                         <!-- Technical Specification Meta Card -->
                         <div
-                            class="p-6 rounded-2xl bg-white/[0.02] border border-[var(--border-subtle)] space-y-4 font-mono text-[10px] tracking-wider uppercase">
+                            class="p-6 rounded-2xl bg-white/[0.02] border border-[var(--border-subtle)] space-y-4 font-mono text-xs tracking-wider uppercase">
                             <span
                                 class="block text-[var(--muted)] tracking-[0.2em] font-semibold border-b border-[var(--border-subtle)] pb-2">
                                 ARCHITECTURE METADATA
@@ -303,7 +303,7 @@
                             <div v-if="project.problemSolution" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                                 <div class="space-y-3 p-6 rounded-2xl bg-red-950/10 border border-red-500/20">
                                     <span
-                                        class="font-mono text-[10px] tracking-[0.2em] text-red-400 uppercase font-semibold flex items-center gap-2">
+                                        class="font-mono text-xs tracking-[0.2em] text-red-400 uppercase font-semibold flex items-center gap-2">
                                         <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
                                         <span>CHALLENGE &amp; CONSTRAINT</span>
                                     </span>
@@ -315,7 +315,7 @@
 
                                 <div class="space-y-3 p-6 rounded-2xl bg-emerald-950/10 border border-emerald-500/20">
                                     <span
-                                        class="font-mono text-[10px] tracking-[0.2em] text-emerald-400 uppercase font-semibold flex items-center gap-2">
+                                        class="font-mono text-xs tracking-[0.2em] text-emerald-400 uppercase font-semibold flex items-center gap-2">
                                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                         <span>ENGINEERED ARCHITECTURE</span>
                                     </span>
@@ -339,7 +339,7 @@
 
                             <div class="p-6 sm:p-8 rounded-2xl border border-white/10 bg-white/[0.02] space-y-2">
                                 <span
-                                    class="font-mono text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase block">
+                                    class="font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase block">
                                     CORE RESPONSIBILITY &amp; SCOPE
                                 </span>
                                 <p
@@ -404,7 +404,7 @@
                                         </span>
                                         <span class="w-8 h-[1px] bg-[var(--border-subtle)]"></span>
                                         <span v-if="feature.tech"
-                                            class="font-mono text-[10px] tracking-[0.2em] text-blue-400 uppercase">
+                                            class="font-mono text-xs tracking-[0.2em] text-blue-400 uppercase">
                                             {{ feature.tech }}
                                         </span>
                                     </div>
@@ -465,7 +465,7 @@
                                         {{ metric.value }}
                                     </div>
                                     <div
-                                        class="font-mono text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-[var(--muted)] font-medium leading-tight">
+                                        class="font-mono text-xs tracking-[0.18em] uppercase text-[var(--muted)] font-medium leading-tight">
                                         {{ metric.label }}
                                     </div>
                                 </div>
@@ -490,7 +490,11 @@
                             <!-- Dynamic Gallery Grid -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div v-for="(item, idx) in project.gallery" :key="idx" @click="openLightbox(item.url)"
-                                    class="cs-gallery-item group relative flex flex-col justify-between rounded-2xl border border-[var(--border-subtle)] hover:border-white/30 bg-white/[0.02] p-4 transition-all duration-300 cursor-zoom-in overflow-hidden">
+                                    class="cs-gallery-item group relative flex flex-col justify-between rounded-2xl border border-[var(--border-subtle)] hover:border-white/30 bg-white/[0.02] p-4 transition-all duration-300 cursor-zoom-in overflow-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                                    tabindex="0"
+                                    role="button"
+                                    :aria-label="'View full image ' + (item.title || (idx + 1))"
+                                    @keydown.enter="openLightbox(item.url)">
                                     <div
                                         class="relative aspect-[16/10] w-full rounded-xl bg-[#121316] overflow-hidden mb-4">
                                         <img :src="item.url" :alt="item.title || ('Gallery Image ' + (idx + 1))"
@@ -525,14 +529,14 @@
                         class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--border-subtle)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
                         <!-- PREVIOUS PROJECT -->
                         <router-link v-if="adjacent.prev" :to="'/projects/' + adjacent.prev.slug"
-                            class="group p-8 sm:p-12 hover:bg-white/[0.02] transition-colors flex flex-col justify-between cursor-pointer">
+                            class="group p-8 sm:p-12 hover:bg-white/[0.02] transition-colors flex flex-col justify-between cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                             <span
-                                class="font-mono text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase mb-6 flex items-center gap-2">
+                                class="font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase mb-6 flex items-center gap-2">
                                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span>
                                 <span>PREVIOUS WORK</span>
                             </span>
                             <div>
-                                <span class="font-mono text-[10px] tracking-wider text-blue-400 uppercase block mb-1">
+                                <span class="font-mono text-xs tracking-wider text-blue-400 uppercase block mb-1">
                                     {{ adjacent.prev.category }}
                                 </span>
                                 <h3
@@ -548,14 +552,14 @@
 
                         <!-- NEXT PROJECT -->
                         <router-link v-if="adjacent.next" :to="'/projects/' + adjacent.next.slug"
-                            class="group p-8 sm:p-12 hover:bg-white/[0.02] transition-colors flex flex-col justify-between text-right cursor-pointer">
+                            class="group p-8 sm:p-12 hover:bg-white/[0.02] transition-colors flex flex-col justify-between text-right cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none">
                             <span
-                                class="font-mono text-[10px] tracking-[0.25em] text-[var(--muted)] uppercase mb-6 flex items-center justify-end gap-2">
+                                class="font-mono text-xs tracking-[0.2em] text-[var(--muted)] uppercase mb-6 flex items-center justify-end gap-2">
                                 <span>NEXT WORK</span>
                                 <span class="transform group-hover:translate-x-1 transition-transform">→</span>
                             </span>
                             <div>
-                                <span class="font-mono text-[10px] tracking-wider text-blue-400 uppercase block mb-1">
+                                <span class="font-mono text-xs tracking-wider text-blue-400 uppercase block mb-1">
                                     {{ adjacent.next.category }}
                                 </span>
                                 <h3
@@ -605,6 +609,7 @@ import NotFoundView from './NotFoundView.vue';
 import { getAdjacentProjects, resolveProjectData } from '../data/projectsData.js';
 import { useGsap } from '../composables/useGsap';
 import { useTheme } from '../composables/useTheme';
+import { updateSeo } from '../utils/seo.js';
 
 const props = defineProps({
     slug: {
@@ -681,6 +686,14 @@ const fetchProjectsAndHydrate = async () => {
         console.error('Failed to fetch API projects:', err);
     } finally {
         project.value = resolveProjectData(currentSlug.value, apiProjects.value);
+        if (project.value) {
+            updateSeo({
+                title: `${project.value.title} — Case Study | Naufal Tsaqif`,
+                description: project.value.shortDescription || project.value.overview || `Detailed engineering case study for ${project.value.title} by Naufal Tsaqif.`,
+                image: project.value.heroImage || project.value.image || '/images/guwe.jpeg',
+                url: window.location.href,
+            });
+        }
         isLoading.value = false;
         await nextTick();
         initCaseStudyAnimations();

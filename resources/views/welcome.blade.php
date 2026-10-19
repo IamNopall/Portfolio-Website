@@ -3,30 +3,94 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="High-end personal portfolio built with Laravel and Vue.">
 
-        <title>{{ config('app.name', 'Portfolio') }}</title>
+        <!-- Primary SEO Metadata -->
+        <title>Naufal Tsaqif — Informatics Engineer &amp; Creative Developer</title>
+        <meta name="title" content="Naufal Tsaqif — Informatics Engineer &amp; Creative Developer">
+        <meta name="description" content="Portfolio of Naufal Tsaqif (IamNopall), an Informatics Engineer and Creative Developer specializing in Unity 3D (C#), spatial computing, VR, Vue 3, Laravel, and high-performance interactive web systems.">
+        <meta name="keywords" content="Naufal Tsaqif, Naufal Tsaqif Athala Irchamto, IamNopall, Informatics Engineer, Creative Developer, Unity 3D Developer, VR Developer, Game Developer, Web Developer, Vue.js, Laravel, Portfolio">
+        <meta name="author" content="Naufal Tsaqif">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <meta name="theme-color" content="#09090b">
+        <link rel="canonical" href="{{ config('app.url', 'https://naufaltsaqif.me') }}">
 
-        <!-- Dynamic Favicon Icons -->
-        <link rel="icon" type="image/png" href="/images/whitelogo.png" media="(prefers-color-scheme: dark)" />
-        <link rel="icon" type="image/png" href="/images/blacklogo.png" media="(prefers-color-scheme: light)" />
-        <link rel="icon" type="image/png" href="/images/whitelogo.png" />
+        <!-- Open Graph / Facebook / LinkedIn -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ config('app.url', 'https://naufaltsaqif.me') }}">
+        <meta property="og:title" content="Naufal Tsaqif — Informatics Engineer &amp; Creative Developer">
+        <meta property="og:description" content="Portfolio of Naufal Tsaqif (IamNopall). Informatics Engineer specializing in Unity 3D, spatial mechanics, Vue 3, and modern web architectures.">
+        <meta property="og:image" content="{{ asset('images/guwe.jpeg') }}">
+        <meta property="og:image:alt" content="Naufal Tsaqif summit portrait">
+        <meta property="og:site_name" content="Naufal Tsaqif Portfolio">
+        <meta property="og:locale" content="en_US">
 
+        <!-- Twitter Cards -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{{ config('app.url', 'https://naufaltsaqif.me') }}">
+        <meta name="twitter:title" content="Naufal Tsaqif — Informatics Engineer &amp; Creative Developer">
+        <meta name="twitter:description" content="Portfolio of Naufal Tsaqif (IamNopall). Informatics Engineer specializing in Unity 3D, spatial mechanics, Vue 3, and modern web architectures.">
+        <meta name="twitter:image" content="{{ asset('images/guwe.jpeg') }}">
+
+        <!-- Webmanifest & Favicons -->
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="icon" type="image/png" href="/images/whitelogo.png" media="(prefers-color-scheme: dark)">
+        <link rel="icon" type="image/png" href="/images/blacklogo.png" media="(prefers-color-scheme: light)">
+        <link rel="icon" type="image/png" href="/images/whitelogo.png">
+        <link rel="apple-touch-icon" href="/images/whitelogo.png">
+
+        <!-- Preconnect Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800,900&display=swap" rel="stylesheet" />
-        <link href="https://fonts.bunny.net/css?family=manrope:300,400,500,600,700,800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.bunny.net/css?family=manrope:300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+        <!-- Structured Data (Schema.org JSON-LD for Google Knowledge Graph) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              "@id": "https://naufaltsaqif.me/#person",
+              "name": "Naufal Tsaqif",
+              "alternateName": ["Naufal Tsaqif Athala Irchamto", "IamNopall"],
+              "jobTitle": "Informatics Engineer & Creative Developer",
+              "description": "Informatics Engineer specializing in Unity 3D, spatial computing, VR, Vue 3, and Laravel architectures.",
+              "image": "https://naufaltsaqif.me/images/guwe.jpeg",
+              "url": "https://naufaltsaqif.me/",
+              "sameAs": [
+                "https://github.com/IamNopall",
+                "https://www.linkedin.com/in/naufal-tsaqif-athala-irchamto"
+              ],
+              "knowsAbout": [
+                "Informatics Engineering",
+                "Unity 3D",
+                "C#",
+                "Virtual Reality (VR)",
+                "Vue.js",
+                "Laravel",
+                "Game Development",
+                "Web Development",
+                "Spatial Computing"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://naufaltsaqif.me/#website",
+              "url": "https://naufaltsaqif.me/",
+              "name": "Naufal Tsaqif — Informatics Engineer & Creative Developer",
+              "description": "Selected works, case studies, and engineering portfolio of Naufal Tsaqif.",
+              "publisher": {
+                "@id": "https://naufaltsaqif.me/#person"
+              }
+            }
+          ]
+        }
+        </script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
-        <!--
-        THESIS: Replaces the hollow cutout standee slot with an architectural monograph dossier—pairing real mountain summit portraiture with technical telemetry, live availability signals, and kinetic parallax hierarchy, refusing generic cookie-cutter portfolio cards.
-        OWN-WORLD: Obsidian backdrop (#09090b), zinc-800 architectural hairlines, pure white display typography, cobalt focal accents (#2563eb), and tactile glass telemetry cards with subtle border glow.
-        STORY: Visitors immediately grasp Naufal's persona as an engineering craftsman: viewing real summit photography framed by geographic coordinates, technical discipline badges, and living availability status before reading the core mission statement.
-        FIRST VIEWPORT: Left: Monumental display statement ('ARCHITECTING SYSTEMS INTO REALITIES') with live coordinate badge; Center/Right: Architectural vertical dossier frame housing guwe.jpeg with parallax depth scrub and floating telemetry tags; Right/Bottom: Concise engineering manifesto and direct project index anchors.
-        FORM: Editorial Architectural Monograph Dossier with kinetic scrub, seed 0904e589.
-        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
-        -->
         <div id="app"></div>
     </body>
 </html>

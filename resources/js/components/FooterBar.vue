@@ -1,12 +1,12 @@
 <template>
     <footer class="fixed bottom-0 left-0 right-0 z-40 pointer-events-none inverted-chrome">
         <div
-            class="px-4 sm:px-8 pb-4 pt-3 sm:pb-6 sm:pt-4 flex justify-between items-center w-full text-[9px] sm:text-[11px] tracking-[0.18em] font-sans chrome-font uppercase">
+            class="px-4 sm:px-8 pb-4 pt-3 sm:pb-6 sm:pt-4 flex justify-between items-center w-full text-xs tracking-[0.18em] font-mono chrome-font uppercase">
             <!-- Left Corner: Light / Dark Mode Toggle Button (Mobile Only) -->
             <div>
                 <button
                     type="button"
-                    class="sm:hidden pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity select-none flex items-center py-1 -ml-1"
+                    class="sm:hidden pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity select-none flex items-center py-1 -ml-1 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                     :aria-pressed="isLightMode"
                     @click="toggleTheme"
                     title="Toggle Light / Dark Mode"

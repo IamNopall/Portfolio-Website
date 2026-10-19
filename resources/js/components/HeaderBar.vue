@@ -1,17 +1,17 @@
 <template>
     <header class="fixed top-0 left-0 right-0 z-50 pointer-events-none inverted-chrome">
         <div
-            class="px-4 sm:px-8 pt-4 sm:pt-6 pb-4 relative flex items-center justify-between w-full text-[11px] tracking-[0.2em] font-sans chrome-font uppercase">
+            class="px-4 sm:px-8 pt-4 sm:pt-6 pb-4 relative flex items-center justify-between w-full text-xs tracking-[0.2em] font-mono chrome-font uppercase">
             <!-- Left Edge: Portfolio & Theme Toggle (Desktop) -->
             <div class="flex items-center gap-6 sm:gap-8 pointer-events-auto">
                 <a href="#top"
-                    class="hidden sm:inline-flex items-center py-2 px-3 -ml-3 cursor-pointer hover:opacity-75 transition-opacity"
+                    class="hidden sm:inline-flex items-center py-2 px-3 -ml-3 cursor-pointer hover:opacity-75 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
                 <button
                     type="button"
-                    class="hidden sm:inline-flex items-center py-2 px-3 cursor-pointer hover:opacity-75 transition-opacity select-none"
+                    class="hidden sm:inline-flex items-center py-2 px-3 cursor-pointer hover:opacity-75 transition-opacity select-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                     :aria-pressed="isLightMode"
                     @click="toggleTheme"
                 >
@@ -24,7 +24,7 @@
             <!-- Mobile Top Center Header Text: Portfolio -->
             <div class="sm:hidden absolute left-1/2 -translate-x-1/2 top-4 flex items-center gap-3">
                 <a href="#top"
-                    class="inline-flex items-center py-2 px-2 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity"
+                    class="inline-flex items-center py-2 px-2 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                     @click.prevent="scrollToSection('#top')">
                     Portfolio
                 </a>
@@ -34,12 +34,12 @@
             <div
                 class="fixed right-3 sm:right-auto top-1/2 sm:top-auto -translate-y-1/2 sm:translate-y-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 z-[60]">
                 <button type="button"
-                    class="menu-toggle pointer-events-auto cursor-pointer hover:opacity-80 transition-all flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 max-sm:px-3 max-sm:py-4 max-sm:border max-sm:border-[var(--border-subtle)] max-sm:bg-[var(--bg)]/90 max-sm:backdrop-blur-xl max-sm:shadow-2xl max-sm:rounded-sm select-none"
+                    class="menu-toggle pointer-events-auto cursor-pointer hover:opacity-80 transition-all flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 max-sm:px-3 max-sm:py-4 max-sm:border max-sm:border-[var(--border-subtle)] max-sm:bg-[var(--bg)]/90 max-sm:backdrop-blur-xl max-sm:shadow-2xl max-sm:rounded-sm select-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                     :aria-expanded="menuOpen" aria-controls="menu-overlay" @click.stop="toggleMenu"
                     @mouseenter="isMenuHover = true" @mouseleave="isMenuHover = false">
                     <Transition name="menu-label" mode="out-in">
                         <span :key="menuLabel"
-                            class="menu-label max-sm:[writing-mode:vertical-rl] max-sm:tracking-[0.25em] max-sm:text-[10px] font-mono select-none pointer-events-none">{{
+                            class="menu-label max-sm:[writing-mode:vertical-rl] max-sm:tracking-[0.25em] max-sm:text-xs font-mono select-none pointer-events-none">{{
                                 menuLabel }}</span>
                     </Transition>
                 </button>
@@ -48,7 +48,7 @@
             <!-- Right Edge: Let's Talk! -->
             <div>
                 <a href="#contact"
-                    class="hidden sm:inline-flex items-center py-2 px-3 -mr-3 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity"
+                    class="hidden sm:inline-flex items-center py-2 px-3 -mr-3 pointer-events-auto cursor-pointer hover:opacity-75 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none rounded-sm"
                     @click.prevent="scrollToSection('#contact')">
                     Let's Talk!
                 </a>

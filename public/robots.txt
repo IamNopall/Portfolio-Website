@@ -1,2 +1,9 @@
+# Robots.txt for Naufal Tsaqif Portfolio
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /adminnopal
+Disallow: /adminnopal/
+Disallow: /api/
+
+# Sitemaps
+Sitemap: /sitemap.xml
